@@ -1,4 +1,5 @@
-"use client"
+'use client';
+
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import {
@@ -6,6 +7,7 @@ import {
   FiUsers, FiUserPlus, FiSettings, FiMenu, FiX,
   FiHome, FiTrendingUp, FiAward, FiDatabase
 } from 'react-icons/fi';
+import CloudinaryUploader from './CloudinaryUploader'; // Import the component
 
 export default function AdminPanel() {
   const [adminData, setAdminData] = useState(null);
@@ -92,7 +94,7 @@ export default function AdminPanel() {
   }
 
   return (
-    <div className="flex min-h-fit bg-gradient-to-br  pt-3 pb-3">
+    <div className="flex min-h-fit bg-gradient-to-br  pt-22 pb-3">
       {/* Sidebar */}
       <div className={`fixed md:relative bg-gradient-to-b rounded-4xl ml-3  from-red-800 to-red-900 text-white h-screen  transition-all duration-500 ease-in-out ${isSidebarOpen ? 'w-64 opacity-100' : 'w-0 md:w-20 opacity-0 md:opacity-100 overflow-hidden'} ${isMobileView ? (isSidebarOpen ? 'w-64 opacity-100' : 'w-0 opacity-0') : ''}`}>
         <div className="p-5 border-b border-red-700 flex justify-between items-center h-16">
@@ -303,12 +305,11 @@ const BlogsSection = () => (
   </SectionTemplate>
 );
 
+// Updated GallerySection to use CloudinaryUploader
 const GallerySection = () => (
   <SectionTemplate title="Gallery Editor">
     <p className="text-gray-600 mb-4">Manage your photo gallery.</p>
-    <div className="bg-white p-4 rounded-xl shadow-md">
-      {/* Gallery management UI would go here */}
-    </div>
+    <CloudinaryUploader />
   </SectionTemplate>
 );
 

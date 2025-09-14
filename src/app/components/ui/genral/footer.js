@@ -31,14 +31,14 @@ const Footer = () => {
   return (
     <footer 
       ref={footerRef}
-      className="bg-gradient-to-b from-white to-red-50 text-gray-800 overflow-hidden border-t border-red-200"
+      className="bg-blue-500 text-white overflow-hidden border-t-4 border-yellow-400"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(5)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-64 h-64 border border-red-200 rounded-full"
+            className="absolute w-64 h-64 border-2 border-yellow-400/20 rounded-full"
             style={{
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
@@ -56,33 +56,33 @@ const Footer = () => {
             
             {/* Brand/Logo Section */}
             <div className="flex flex-col items-center md:items-start">
-              <div className="mb-8 bg-gradient-to-r from-red-600 to-yellow-500 p-3 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md hover:shadow-red-500/30">
-                <div className="w-48 h-14 bg-white flex items-center justify-center rounded-lg shadow-sm">
+              <div className="mb-8 bg-gradient-to-r from-red-600 to-red-700 p-3 rounded-xl transform hover:scale-105 transition-transform duration-300 shadow-md hover:shadow-red-500/30">
+                <div className="w-48 h-14 bg-gradient-to-r from-yellow-400 to-yellow-500 flex items-center justify-center rounded-lg shadow-sm">
                   {/* Logo with animated truck */}
                   <div className="relative flex items-center">
                     <div className="absolute -left-6 animate-bounce-side">
-                      <FaTruck className="text-red-600 text-2xl" />
+                      <FaTruck className="text-red-700 text-2xl" />
                     </div>
                     <span className="text-gray-900 font-bold text-xl ml-2 tracking-wide">DRIVE SAFE</span>
                   </div>
                 </div>
               </div>
-              <p className="text-gray-600 text-center md:text-left mb-6 leading-relaxed">
+              <p className="text-blue-100 text-center md:text-left mb-6 leading-relaxed">
                 Your premier truck driving school with over 15 years of experience training professional drivers.
               </p>
               <div className="flex space-x-3">
                 {[
-                  { icon: FaFacebook, color: 'hover:bg-red-600' },
-                  { icon: FaTwitter, color: 'hover:bg-yellow-500' },
-                  { icon: FaInstagram, color: 'hover:bg-gradient-to-r from-red-500 to-yellow-400' },
-                  { icon: FaLinkedin, color: 'hover:bg-red-700' }
+                  { icon: FaFacebook, color: 'text-white bg-blue-600 hover:bg-blue-700' },
+                  { icon: FaTwitter, color: 'text-white bg-blue-400 hover:bg-blue-500' },
+                  { icon: FaInstagram, color: 'text-white bg-pink-600 hover:bg-pink-700' },
+                  { icon: FaLinkedin, color: 'text-white bg-blue-800 hover:bg-blue-900' }
                 ].map((social, index) => (
                   <a 
                     key={index}
                     href="#" 
-                    className={`w-10 h-10 bg-white border border-red-100 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 transform hover:-translate-y-1 ${social.color} shadow-sm hover:shadow-md`}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 transform hover:-translate-y-1 ${social.color} shadow-sm hover:shadow-md`}
                   >
-                    <social.icon className="text-gray-700 text-lg hover:text-white" />
+                    <social.icon className="text-lg" />
                   </a>
                 ))}
               </div>
@@ -90,10 +90,10 @@ const Footer = () => {
 
             {/* Quick Links */}
             <div className="flex flex-col items-center md:items-start">
-              <h3 className="text-xl font-bold mb-6 relative inline-block text-gray-900">
+              <h3 className="text-xl font-bold mb-6 relative inline-block text-white">
                 Quick Links
-                <span className="absolute left-0 bottom-[-8px] w-10 h-1 bg-red-600 rounded-full"></span>
-                <span className="absolute left-0 bottom-[-8px] w-3 h-1 bg-yellow-400 rounded-full animate-pulse"></span>
+                <span className="absolute left-0 bottom-[-8px] w-10 h-1 bg-yellow-400 rounded-full"></span>
+                <span className="absolute left-0 bottom-[-8px] w-3 h-1 bg-red-500 rounded-full animate-pulse"></span>
               </h3>
               <ul className="space-y-3">
                 {['Home', 'Courses', 'Pricing', 'Instructors', 'Contact'].map((link, index) => (
@@ -104,9 +104,9 @@ const Footer = () => {
                   >
                     <Link 
                       href={`/${link.toLowerCase()}`} 
-                      className="text-gray-600 hover:text-red-600 transition-all duration-300 flex items-center transform hover:translate-x-2"
+                      className="text-blue-100 hover:text-yellow-300 transition-all duration-300 flex items-center transform hover:translate-x-2"
                     >
-                      <span className="w-2 h-2 bg-red-600 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
+                      <span className="w-2 h-2 bg-yellow-400 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
                       {link}
                     </Link>
                   </li>
@@ -116,10 +116,10 @@ const Footer = () => {
 
             {/* Programs */}
             <div className="flex flex-col items-center md:items-start">
-              <h3 className="text-xl font-bold mb-6 relative inline-block text-gray-900">
+              <h3 className="text-xl font-bold mb-6 relative inline-block text-white">
                 Programs
-                <span className="absolute left-0 bottom-[-8px] w-10 h-1 bg-red-600 rounded-full"></span>
-                <span className="absolute left-0 bottom-[-8px] w-3 h-1 bg-yellow-400 rounded-full animate-pulse"></span>
+                <span className="absolute left-0 bottom-[-8px] w-10 h-1 bg-yellow-400 rounded-full"></span>
+                <span className="absolute left-0 bottom-[-8px] w-3 h-1 bg-red-500 rounded-full animate-pulse"></span>
               </h3>
               <ul className="space-y-3">
                 {['CDL Training', 'Beginner Course', 'Advanced Maneuvers', 'Hazard Materials', 'Refresher Course'].map((program, index) => (
@@ -130,9 +130,9 @@ const Footer = () => {
                   >
                     <Link 
                       href={`/programs/${program.toLowerCase().replace(' ', '-')}`} 
-                      className="text-gray-600 hover:text-red-600 transition-all duration-300 flex items-center transform hover:translate-x-2"
+                      className="text-blue-100 hover:text-yellow-300 transition-all duration-300 flex items-center transform hover:translate-x-2"
                     >
-                      <span className="w-2 h-2 bg-red-600 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
+                      <span className="w-2 h-2 bg-yellow-400 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
                       {program}
                     </Link>
                   </li>
@@ -142,10 +142,10 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div className="flex flex-col items-center md:items-start">
-              <h3 className="text-xl font-bold mb-6 relative inline-block text-gray-900">
+              <h3 className="text-xl font-bold mb-6 relative inline-block text-white">
                 Contact Us
-                <span className="absolute left-0 bottom-[-8px] w-10 h-1 bg-red-600 rounded-full"></span>
-                <span className="absolute left-0 bottom-[-8px] w-3 h-1 bg-yellow-400 rounded-full animate-pulse"></span>
+                <span className="absolute left-0 bottom-[-8px] w-10 h-1 bg-yellow-400 rounded-full"></span>
+                <span className="absolute left-0 bottom-[-8px] w-3 h-1 bg-red-500 rounded-full animate-pulse"></span>
               </h3>
               <ul className="space-y-5">
                 {[
@@ -158,10 +158,10 @@ const Footer = () => {
                     className="flex items-start group"
                     style={{ animationDelay: isVisible ? `${index * 150 + 400}ms` : '0ms' }}
                   >
-                    <div className="w-9 h-9 bg-gradient-to-br from-red-600 to-yellow-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0 transform group-hover:scale-110 transition-transform duration-300 shadow-sm group-hover:shadow-red-500/20">
+                    <div className="w-9 h-9 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center mr-3 flex-shrink-0 transform group-hover:scale-110 transition-transform duration-300 shadow-sm group-hover:shadow-red-500/20">
                       <contact.icon className="text-white text-sm" />
                     </div>
-                    <span className="text-gray-600 pt-1 group-hover:text-red-600 transition-colors duration-300">{contact.text}</span>
+                    <span className="text-blue-100 pt-1 group-hover:text-yellow-300 transition-colors duration-300">{contact.text}</span>
                   </li>
                 ))}
               </ul>
@@ -171,10 +171,10 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-red-200 relative">
+      <div className="border-t border-blue-700 relative">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-500 text-sm mb-3 md:mb-0">
+            <p className="text-blue-200 text-sm mb-3 md:mb-0">
               © {new Date().getFullYear()} Drive Safe Trucking School. All rights reserved.
             </p>
             <div className="flex space-x-5">
@@ -182,7 +182,7 @@ const Footer = () => {
                 <Link 
                   key={item}
                   href={`/${item.toLowerCase().replace(' ', '-')}`} 
-                  className="text-gray-500 hover:text-red-600 text-sm transition-colors duration-300 hover:underline underline-offset-4"
+                  className="text-blue-200 hover:text-yellow-300 text-sm transition-colors duration-300 hover:underline underline-offset-4"
                 >
                   {item}
                 </Link>

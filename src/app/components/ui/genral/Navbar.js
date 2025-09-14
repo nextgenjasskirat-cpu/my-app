@@ -9,18 +9,12 @@ import { IoIosCall } from "react-icons/io";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isVerificationOpen, setIsVerificationOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
 
-  // Handle scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // Logo dimensions
+  const logoWidth = 200;
+  const logoHeight = 80;
 
   const phoneNumbers = [
     { label: 'Official Contact', number: '+91 97812-78770' },
@@ -31,9 +25,8 @@ export default function Navbar() {
     { name: 'Home', href: '/' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Admissions', href: '/admissions' },
-    { name: 'schedule', href: '/schedule' },
+    { name: 'Schedule', href: '/schedule' },
     { name: 'About Us', href: '/aboutUs' },
-
     { 
       name: 'Extras', 
       href: '#', 
@@ -46,14 +39,18 @@ export default function Navbar() {
 
   const socialLinks = [
     { 
-      icon: <FaInstagram className="h-6 w-6" />, 
+      icon: <FaInstagram className="h-5 w-5" />, 
       href: 'https://www.instagram.com/hii.mahii/', 
-      name: 'Instagram' 
+      name: 'Instagram',
+      color: "hover:text-white hover:bg-[#E1306C]",
+      bg: "bg-[#E1306C]"
     },
     { 
-      icon: <FaWhatsapp className="h-6 w-6" />, 
+      icon: <FaWhatsapp className="h-5 w-5" />, 
       href: 'https://wa.me/9781278770?text=Hi%2C%20I%20am%20interested%20in%20your%20services%20at%20Colour%20Sense%20Salon.%20Could%20you%20please%20help%20me%20with%20more%20details%3F',
-      name: 'WhatsApp' 
+      name: 'WhatsApp',
+      color: "hover:text-white hover:bg-[#25D366]",
+      bg: "bg-[#25D366]"
     }
   ];
 
@@ -62,7 +59,11 @@ export default function Navbar() {
     document.body.style.overflow = isOpen ? '' : 'hidden';
   };
 
-  // Animation variants for smoother transitions
+  const toggleDropdown = (name) => {
+    setActiveDropdown(activeDropdown === name ? null : name);
+  };
+
+  // Animation variants
   const menuVariants = {
     closed: {
       x: "100%",
@@ -97,46 +98,56 @@ export default function Navbar() {
     open: { rotate: 90 }
   };
 
+  const dropdownVariants = {
+    hidden: { opacity: 0, y: -10, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.2 } },
+    exit: { opacity: 0, y: -10, scale: 0.95, transition: { duration: 0.15 } }
+  };
+
+  const socialIconVariants = {
+    rest: { scale: 1 },
+    hover: { 
+      scale: 1.2,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 10
+      }
+    }
+  };
+
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          isScrolled 
-            ? "h-[140px] md:h-[170px] shadow-md" 
-            : "h-[140px] md:h-[170px]"
-        }`}
-        style={{
-          background: "url('/NavbarBG.png') no-repeat left center/cover",
-        }}
-      >
+      <nav className="fixed top-0 left-0 w-full z-50 h-26 bg-white shadow-md">
         {/* Navbar container */}
-        <div className="flex items-center h-full px-4">
+        <div className="container mx-auto flex items-center justify-between h-full px-4 md:px-6">
           {/* Logo */}
           <motion.div
-            className="text-black font-bold text-2xl cursor-pointer flex items-center relative -top-4 pl-30"
+            className="font-bold text-xl cursor-pointer flex items-center"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.05 }}
           >
             <motion.div 
-              className="relative w-12 h-12 mr-3"
+              className="relative mr-2"
               whileHover={{ rotate: [0, -5, 0] }}
               transition={{ duration: 0.5 }}
+              style={{ width: `${logoWidth}px`, height: `${logoHeight}px` }}
             >
               <Image
                 src="/logo.png"
                 alt="Logo"
                 fill
                 className="object-contain"
+                style={{ width: '100%', height: '100%' }}
               />
             </motion.div>
-            <span className="hidden sm:inline-block text-lg md:text-xl">Truck driving</span>
           </motion.div>
 
           {/* Desktop Links */}
           <motion.ul
-            className="hidden lg:flex gap-8 text-black font-medium relative -top-4 mr-5 pl-[10%]"
+            className="hidden lg:flex gap-6 font-medium"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
@@ -147,36 +158,35 @@ export default function Navbar() {
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}
                 className="relative"
+                onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+                onMouseLeave={() => item.dropdown && setActiveDropdown(null)}
               >
                 {item.dropdown ? (
-                  <div 
-                    className="relative"
-                    onMouseEnter={() => setIsVerificationOpen(true)}
-                    onMouseLeave={() => setIsVerificationOpen(false)}
-                  >
+                  <div className="relative">
                     <motion.button 
-                      className="flex items-center hover:text-red-600 transition-colors relative"
+                      className="flex items-center transition-colors relative px-3 py-2 rounded-lg group text-gray-700 hover:text-blue-600"
                       whileHover={{ scale: 1.05 }}
+                      onClick={() => toggleDropdown(item.name)}
                     >
-                      {item.name}
+                      <span className="transition-colors duration-300 font-semibold">
+                        {item.name}
+                      </span>
                       <motion.div
-                        animate={{ rotate: isVerificationOpen ? 180 : 0 }}
+                        animate={{ rotate: activeDropdown === item.name ? 180 : 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <ChevronDownIcon className="ml-1 h-4 w-4" />
+                        <ChevronDownIcon className="ml-1 h-4 w-4 transition-colors duration-300 text-gray-700 group-hover:text-blue-600" />
                       </motion.div>
                     </motion.button>
                     
                     <AnimatePresence>
-                      {isVerificationOpen && (
+                      {activeDropdown === item.name && (
                         <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-yellow-400"
-                          onMouseEnter={() => setIsVerificationOpen(true)}
-                          onMouseLeave={() => setIsVerificationOpen(false)}
+                          variants={dropdownVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          className="absolute left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200"
                         >
                           {item.dropdown.map((dropdownItem) => (
                             <motion.div
@@ -186,7 +196,8 @@ export default function Navbar() {
                             >
                               <Link
                                 href={dropdownItem.href}
-                                className="block px-4 py-2 text-black hover:bg-red-50 hover:text-red-600"
+                                className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                                onClick={() => setActiveDropdown(null)}
                               >
                                 {dropdownItem.name}
                               </Link>
@@ -199,17 +210,17 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={item.href}
-                    className="hover:text-red-600 transition-colors relative py-1"
+                    className="transition-colors relative py-1 px-3 rounded-lg block group text-gray-700 hover:text-blue-600"
                   >
                     <motion.span
                       whileHover={{ scale: 1.05 }}
+                      className="relative transition-colors duration-300 font-semibold"
                     >
                       {item.name}
+                      <motion.span 
+                        className="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-blue-600"
+                      />
                     </motion.span>
-                    <motion.span 
-                      className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 hover:w-full"
-                      whileHover={{ width: "100%" }}
-                    />
                   </Link>
                 )}
               </motion.li>
@@ -217,42 +228,43 @@ export default function Navbar() {
           </motion.ul>
 
           {/* Desktop Social Icons and Phone */}
-          <div className="hidden lg:flex items-center gap-4 relative -top-4 pl-[10%]">
+          <div className="hidden lg:flex items-center gap-3">
             {/* Phone Dropdown */}
             <div className="relative">
               <motion.button
                 onClick={() => setIsPhoneOpen(!isPhoneOpen)}
-                className="text-black hover:text-red-600"
-                whileHover={{ scale: 1.1, color: "#dc2626" }}
+                className="p-2 rounded-full shadow-sm transition-colors text-blue-600 hover:text-blue-800 bg-white border border-gray-200"
+                whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <IoIosCall className="h-6 w-6" />
+                <IoIosCall className="h-5 w-5" />
               </motion.button>
 
               <AnimatePresence>
                 {isPhoneOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50 border border-yellow-400"
+                    variants={dropdownVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200"
                   >
-                    <div className="px-4 py-2 font-medium text-black border-b border-gray-200 bg-red-50">
+                    <div className="px-4 py-2 font-medium text-gray-800 border-b border-gray-200 bg-gray-50">
                       Contact Numbers
                     </div>
                     {phoneNumbers.map((phone, index) => (
                       <motion.a
                         key={index}
                         href={`tel:${phone.number.replace(/\D/g, '')}`}
-                        className="block px-4 py-2 text-black hover:bg-red-50 hover:text-red-600"
+                        className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
                         initial={{ opacity: 0, x: 10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
                         whileHover={{ x: 5 }}
+                        onClick={() => setIsPhoneOpen(false)}
                       >
                         <div className="font-medium">{phone.label}</div>
-                        <div className="text-red-600">{phone.number}</div>
+                        <div className="text-blue-600">{phone.number}</div>
                       </motion.a>
                     ))}
                   </motion.div>
@@ -267,18 +279,21 @@ export default function Navbar() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black hover:text-red-600"
-                whileHover={{ scale: 1.1, color: "#dc2626" }}
-                whileTap={{ scale: 0.9 }}
+                className={`p-2 rounded-full shadow-sm transition-all duration-300 bg-white border border-gray-200 text-gray-600 ${social.color}`}
+                variants={socialIconVariants}
+                initial="rest"
+                whileHover="hover"
+                whileTap="hover"
+                aria-label={social.name}
               >
                 {social.icon}
               </motion.a>
             ))}
           </div>
 
-          {/* Mobile Menu Button - Enhanced with smoother animation */}
+          {/* Mobile Menu Button */}
           <motion.button
-            className="lg:hidden text-black focus:outline-none z-50 relative -top-4 pl-[40%]"
+            className="lg:hidden focus:outline-none z-50 p-2 rounded-lg shadow-sm transition-colors bg-white border border-gray-200 text-gray-700"
             onClick={toggleMenu}
             whileTap={{ scale: 0.95 }}
             aria-label="Toggle menu"
@@ -290,15 +305,15 @@ export default function Navbar() {
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               {isOpen ? (
-                <XMarkIcon className="h-8 w-8" />
+                <XMarkIcon className="h-6 w-6" />
               ) : (
-                <Bars3Icon className="h-8 w-8" />
+                <Bars3Icon className="h-6 w-6" />
               )}
             </motion.div>
           </motion.button>
         </div>
 
-        {/* Mobile Menu - Enhanced with smoother animation */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
             <>
@@ -318,41 +333,60 @@ export default function Navbar() {
                 initial="closed"
                 animate="open"
                 exit="closed"
-                className="fixed top-0 right-0 w-full max-w-sm h-full bg-white text-black flex flex-col z-40 shadow-2xl border-l-2 border-yellow-400"
+                className="fixed top-0 right-0 w-full max-w-sm h-full bg-white text-black flex flex-col z-40 shadow-2xl border-l border-gray-200"
               >
-                <div className="flex-1 overflow-y-auto pt-16 pb-24 px-6">
+                <div className="flex-1 overflow-y-auto pt-20 pb-24 px-6">
+                  <div className="flex justify-between items-center mb-8">
+                    <div className="flex items-center">
+                      <div 
+                        className="relative mr-3"
+                        style={{ width: `${logoWidth}px`, height: `${logoHeight}px` }}
+                      >
+                        <Image
+                          src="/logo.png"
+                          alt="Logo"
+                          fill
+                          className="object-contain"
+                          style={{ width: '100%', height: '100%' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
                   {navLinks.map((item, index) => (
                     <motion.div 
                       key={item.name} 
-                      className="mb-4"
+                      className="mb-2"
                       variants={itemVariants}
                       transition={{ delay: index * 0.05 }}
                     >
                       {item.dropdown ? (
                         <>
                           <motion.button
-                            onClick={() => setIsVerificationOpen(!isVerificationOpen)}
-                            className="flex justify-between items-center w-full text-2xl font-medium py-4 border-b border-gray-200"
-                            whileHover={{ color: "#dc2626" }}
+                            onClick={() => toggleDropdown(item.name)}
+                            className="flex justify-between items-center w-full text-lg font-medium py-4 border-b border-gray-200 text-gray-800"
+                            whileHover={{ color: "#2563eb", x: 5 }}
                             whileTap={{ scale: 0.98 }}
                           >
-                            {item.name}
+                            <span className="hover:text-blue-600 transition-colors duration-300">
+                              {item.name}
+                            </span>
                             <motion.div
-                              animate={{ rotate: isVerificationOpen ? 180 : 0 }}
+                              animate={{ rotate: activeDropdown === item.name ? 180 : 0 }}
                               transition={{ duration: 0.3 }}
                             >
-                              <ChevronDownIcon className="h-6 w-6" />
+                              <ChevronDownIcon className="h-5 w-5 hover:text-blue-600 transition-colors duration-300" />
                             </motion.div>
                           </motion.button>
                           
                           <AnimatePresence>
-                            {isVerificationOpen && (
+                            {activeDropdown === item.name && (
                               <motion.div
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: 'auto' }}
                                 exit={{ opacity: 0, height: 0 }}
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                                className="pl-4 border-l-2 border-red-600 ml-2"
+                                className="pl-4 border-l-2 border-blue-600 ml-2 bg-blue-50 rounded-r-lg"
                               >
                                 {item.dropdown.map((dropdownItem, dIndex) => (
                                   <motion.div
@@ -363,7 +397,7 @@ export default function Navbar() {
                                   >
                                     <Link
                                       href={dropdownItem.href}
-                                      className="block text-xl py-3 text-gray-700 border-b border-gray-200 hover:text-red-600"
+                                      className="block text-base py-3 text-gray-700 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200"
                                       onClick={toggleMenu}
                                     >
                                       {dropdownItem.name}
@@ -377,7 +411,7 @@ export default function Navbar() {
                       ) : (
                         <Link
                           href={item.href}
-                          className="block text-2xl font-medium py-4 border-b border-gray-200 hover:text-red-600"
+                          className="block text-lg font-medium py-4 border-b border-gray-200 text-gray-800 hover:text-blue-600 transition-colors duration-300"
                           onClick={toggleMenu}
                         >
                           <motion.span
@@ -393,25 +427,49 @@ export default function Navbar() {
                   
                   {/* Phone Numbers in Mobile Menu */}
                   <motion.div 
-                    className="mt-8 p-4 bg-red-50 rounded-lg border border-yellow-400"
+                    className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200"
                     variants={itemVariants}
                     transition={{ delay: 0.3 }}
                   >
-                    <div className="text-xl font-medium text-red-800 mb-3">
+                    <div className="text-lg font-medium text-blue-800 mb-3">
                       Contact Numbers
                     </div>
                     {phoneNumbers.map((phone, index) => (
                       <motion.a
                         key={index}
                         href={`tel:${phone.number.replace(/\D/g, '')}`}
-                        className="block py-2 text-gray-700 hover:text-red-600"
+                        className="block py-2 text-gray-700 hover:text-blue-600 transition-colors duration-200"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 + (index * 0.1) }}
                         whileHover={{ x: 5 }}
+                        onClick={toggleMenu}
                       >
                         <div className="font-medium">{phone.label}</div>
-                        <div className="text-red-600">{phone.number}</div>
+                        <div className="text-blue-600">{phone.number}</div>
+                      </motion.a>
+                    ))}
+                  </motion.div>
+                  
+                  {/* Social Icons in Mobile Menu */}
+                  <motion.div 
+                    className="mt-6 flex gap-4 justify-center"
+                    variants={itemVariants}
+                    transition={{ delay: 0.4 }}
+                  >
+                    {socialLinks.map((social) => (
+                      <motion.a
+                        key={social.name}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`p-3 rounded-full text-white ${social.bg}`}
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.9 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        aria-label={social.name}
+                      >
+                        {social.icon}
                       </motion.a>
                     ))}
                   </motion.div>
@@ -422,40 +480,45 @@ export default function Navbar() {
         </AnimatePresence>
       </nav>
       
-      {/* Mobile Social Bar - Always visible on mobile */}
+      {/* Mobile Social Bar - Now with consistent styling */}
       <motion.div 
-        className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t-2 border-yellow-400 py-3 px-6 z-40 flex justify-around items-center"
+        className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-4 z-40 flex justify-around items-center shadow-lg"
         initial={{ y: 100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", damping: 20, stiffness: 200 }}
       >
+        {/* Phone icon with consistent styling */}
         <motion.a
           href={`tel:${phoneNumbers[0].number.replace(/\D/g, '')}`}
-          className="flex flex-col items-center text-black hover:text-red-600"
-          whileHover={{ scale: 1.1 }}
+          className="flex flex-col items-center p-2 rounded-lg transition-colors duration-200  text-blue-600 hover:text-blue-800 hover:bg-gray-50"
+          whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
         >
-          <IoIosCall className="h-7 w-7" />
+          <IoIosCall className="h-6 w-6" />
           <span className="text-xs mt-1">Call</span>
         </motion.a>
+        
+        {/* Social icons with same styling as phone icon */}
         {socialLinks.map((social) => (
           <motion.a
             key={social.name}
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center text-black hover:text-red-600"
-            whileHover={{ scale: 1.1 }}
+            className="flex flex-col items-center p-2 rounded-lg transition-colors duration-200  text-gray-600 hover:text-white hover:bg-gray-50"
+            whileHover={{ scale: 1.1, y: -2 }}
             whileTap={{ scale: 0.9 }}
           >
-            {social.icon}
+            <div className={`p-1 rounded-full ${social.bg} text-white`}>
+              {social.icon}
+            </div>
             <span className="text-xs mt-1">{social.name}</span>
           </motion.a>
         ))}
       </motion.div>
       
-      {/* Padding to account for fixed navbar and social bar on mobile */}
-      <div className={`pt-[140px] lg:pt-0 lg:pb-0 ${isScrolled ? 'pt-[100px] lg:pt-[120px]' : 'pt-[140px] lg:pt-[170px]'}`}></div>
+      {/* Padding to account for fixed navbar */}
+      <div className="pt-30 lg:pt-16"></div>
     </>
   );
 }

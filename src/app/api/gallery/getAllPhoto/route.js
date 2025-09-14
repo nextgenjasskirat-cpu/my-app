@@ -21,7 +21,7 @@ export async function GET() {
 
     const result = await cloudinary.search
       .expression('folder:gallery/*') 
-      .sort_by('public_id', 'desc')
+      .sort_by('created_at', 'desc')
       .with_field('context') 
       .max_results(100)
       .execute();
