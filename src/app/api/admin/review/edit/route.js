@@ -7,18 +7,14 @@ export async function PUT(request) {
     await dbConnect();
 
     const body = await request.json();
-    const { id, name, category, review, rating } = body;
+    const { id, name, review, rating } = body;
 
     if (!id) {
       return NextResponse.json({ message: 'Review ID is required' }, { status: 400 });
     }
 
-    if (!name || !category || !review || !rating) {
+    if (!name || !review || !rating) {
       return NextResponse.json({ message: 'All fields are required' }, { status: 400 });
-    }
-
-    if (!['student', 'staff', 'visitor'].includes(category)) {
-      return NextResponse.json({ message: 'Invalid category' }, { status: 400 });
     }
 
     if (rating < 1 || rating > 5) {
@@ -27,7 +23,7 @@ export async function PUT(request) {
 
     const updatedReview = await Review.findByIdAndUpdate(
       id,
-      { name, category, review, rating, updatedAt: Date.now() },
+      { name, review, rating, updatedAt: Date.now() },
       { new: true, runValidators: true }
     );
 

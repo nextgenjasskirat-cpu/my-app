@@ -8,6 +8,8 @@ import {
   FiHome, FiTrendingUp, FiAward, FiDatabase
 } from 'react-icons/fi';
 import CloudinaryUploader from './CloudinaryUploader'; // Import the component
+import ReviewComponent from '../components/ui/home/review';
+import ReviewsManagement from './ReviewsManagement';
 
 export default function AdminPanel() {
   const [adminData, setAdminData] = useState(null);
@@ -72,7 +74,7 @@ export default function AdminPanel() {
       case 'gallery':
         return <GallerySection />;
       case 'reviews':
-        return <ReviewsSection />;
+        return <ReviewComponent />;
       case 'students':
         return <StudentsSection />;
       case 'add-admin':
@@ -315,10 +317,7 @@ const GallerySection = () => (
 
 const ReviewsSection = () => (
   <SectionTemplate title="Review Editor">
-    <p className="text-gray-600 mb-4">Moderate and respond to customer reviews.</p>
-    <div className="bg-white p-4 rounded-xl shadow-md">
-      {/* Review management UI would go here */}
-    </div>
+    <ReviewsManagement />
   </SectionTemplate>
 );
 

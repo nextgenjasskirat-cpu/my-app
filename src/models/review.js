@@ -6,12 +6,6 @@ const reviewSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  category: {
-    type: String,
-    required: true,
-    enum: ['student', 'staff', 'visitor'],
-    default: 'visitor'
-  },
   review: {
     type: String,
     required: true,

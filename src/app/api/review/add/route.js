@@ -6,21 +6,17 @@ export async function POST(request) {
   try {
     await dbConnect();
 
-    const { name, category, review, rating } = await request.json();
+    const { name, review, rating } = await request.json();
 
-    if (!name || !category || !review || !rating) {
+    if (!name || !review || !rating) {
       return NextResponse.json({ message: 'All fields are required' }, { status: 400 });
-    }
-
-    if (!['student', 'staff', 'visitor'].includes(category)) {
-      return NextResponse.json({ message: 'Invalid category' }, { status: 400 });
     }
 
     if (rating < 1 || rating > 5) {
       return NextResponse.json({ message: 'Rating must be between 1 and 5' }, { status: 400 });
     }
 
-    const newReview = new Review({ name, category, review, rating });
+    const newReview = new Review({ name, review, rating });
     const savedReview = await newReview.save();
 
     return NextResponse.json(

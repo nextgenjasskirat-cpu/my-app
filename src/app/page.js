@@ -1,5 +1,6 @@
 "use client"
 import Carousel from "./components/ui/home/carousel";
+import ReviewComponent from "./components/ui/home/review";
 import Footer from "./components/ui/genral/footer";
 import { useState, useEffect, useRef } from "react";
 
@@ -315,82 +316,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-16 bg-blue-50">
-        <div className="container mx-auto px-4">
-          <div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-10 text-center md:text-4xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              What Our Students Say
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mr-4">
-                    <span className="text-blue-700 font-bold">JD</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">John Doe</h4>
-                    <p className="text-blue-600 text-sm">CDL Class A Graduate</p>
-                  </div>
-                </div>
-                <p className="text-gray-600 italic">
-                  "Elite Truck Driving School gave me the confidence and skills to start my career. The instructors were fantastic and patient with beginners like me."
-                </p>
-                <div className="flex mt-4">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-purple-200 rounded-full flex items-center justify-center mr-4">
-                    <span className="text-purple-700 font-bold">SL</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Sarah Johnson</h4>
-                    <p className="text-purple-600 text-sm">CDL Class B Graduate</p>
-                  </div>
-                </div>
-                <p className="text-gray-600 italic">
-                  "The hands-on training and job placement help were invaluable. I had a job offer before I even graduated! Highly recommend this school."
-                </p>
-                <div className="flex mt-4">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mr-4">
-                    <span className="text-blue-700 font-bold">MR</span>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Mike Robertson</h4>
-                    <p className="text-blue-600 text-sm">Refresher Course Student</p>
-                  </div>
-                </div>
-                <p className="text-gray-600 italic">
-                  "After 10 years away from trucking, the refresher course got me back up to speed quickly. Now I'm back on the road with confidence."
-                </p>
-                <div className="flex mt-4">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+    
+      {/* Review */}
+      <ReviewComponent/>
 
 
       {/* Footer */}

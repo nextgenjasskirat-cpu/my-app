@@ -53,10 +53,10 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-[#e3f1f1] flex justify-center p-7">
+    <div className="min-h-screen bg-[#f1c8c8] flex justify-center p-7 pt-20">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-center text-4xl sm:text-5xl font-bold text-[#1e90ff]">Admin Login</h1>
+          <h1 className="text-center text-4xl sm:text-5xl font-bold text-[#ff0000]">Admin Login</h1>
         </div>
 
         {error && (
@@ -79,7 +79,7 @@ export default function AdminLogin() {
           </div>
         )}
 
-        <div className="bg-white rounded-xl shadow-md overflow-hidden">
+        <div className="bg-[#ffffff] rounded-xl shadow-md overflow-hidden">
           <div className="p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -104,7 +104,7 @@ export default function AdminLogin() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="block w-full pl-10 pr-3 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 focus:outline-none transition duration-150 ease-in-out"
+                    className="block w-full pl-10 pr-3 py-3 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500 placeholder-gray-400 focus:outline-none transition duration-150 ease-in-out"
                     placeholder="admin@example.com"
                   />
                 </div>
@@ -135,7 +135,7 @@ export default function AdminLogin() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="block w-full pl-10 pr-10 py-3 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 focus:outline-none transition duration-150 ease-in-out"
+                    className="block w-full pl-10 pr-10 py-3 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500 placeholder-gray-400 focus:outline-none transition duration-150 ease-in-out"
                     placeholder="••••••••"
                   />
                   <button
@@ -156,7 +156,7 @@ export default function AdminLogin() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-white font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150 ${loading ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'}`}
+                  className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-white font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-150 ${loading ? 'bg-red-400' : 'bg-red-600 hover:bg-red-700'}`}
                 >
                   {loading ? (
                     <>
