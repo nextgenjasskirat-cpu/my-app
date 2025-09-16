@@ -61,7 +61,7 @@ export default function Home() {
     {
       title: "CDL Class A",
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
       ),
@@ -76,7 +76,7 @@ export default function Home() {
     {
       title: "CDL Class B",
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
         </svg>
       ),
@@ -91,7 +91,7 @@ export default function Home() {
     {
       title: "Refresher Courses",
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
       ),
@@ -106,31 +106,121 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-100 font-sans overflow-hidden">
+    <div className="min-h-screen bg-black font-sans overflow-hidden">
+      <style jsx>{`
+        .text-gold {
+          color: #D4AF37;
+        }
+        .bg-gold {
+          background-color: #D4AF37;
+        }
+        .border-gold {
+          border-color: #D4AF37;
+        }
+        .bg-dark {
+          background-color: #0A0A0A;
+        }
+        .bg-darker {
+          background-color: #050505;
+        }
+        .gold-gradient {
+          background: linear-gradient(135deg, #D4AF37 0%, #BF953F 50%, #AA771C 100%);
+        }
+        .gold-gradient-text {
+          background: linear-gradient(135deg, #D4AF37 0%, #BF953F 50%, #AA771C 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .gold-border {
+          position: relative;
+          border: 1px solid transparent;
+          background-clip: padding-box;
+        }
+        .gold-border::before {
+          content: '';
+          position: absolute;
+          top: 0; right: 0; bottom: 0; left: 0;
+          z-index: -1;
+          margin: 1px;
+          border-radius: inherit;
+          background: linear-gradient(135deg, #D4AF37 0%, #BF953F 50%, #AA771C 100%);
+        }
+        .shine-effect {
+          position: relative;
+          overflow: hidden;
+        }
+        .shine-effect::after {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: linear-gradient(
+            to bottom right,
+            rgba(255,255,255,0) 0%,
+            rgba(255,255,255,0.1) 50%,
+            rgba(255,255,255,0) 100%
+          );
+          transform: rotate(30deg);
+          animation: shine 6s infinite linear;
+        }
+        @keyframes shine {
+          0% {
+            transform: translateX(-100%) translateY(-100%) rotate(30deg);
+          }
+          20% {
+            transform: translateX(100%) translateY(100%) rotate(30deg);
+          }
+          100% {
+            transform: translateX(100%) translateY(100%) rotate(30deg);
+          }
+        }
+        .pulse-gold {
+          animation: pulse-gold 2s infinite;
+        }
+        @keyframes pulse-gold {
+          0% {
+            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+          }
+          70% {
+            box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+          }
+        }
+      `}</style>
+
       {/* Hero Section with Carousel */}
       <section className="relative">
         <Carousel />
       </section>
 
       {/* Welcome/About Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-darker relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="text-4xl font-bold text-gray-800 mb-6 md:text-5xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h2 className="text-4xl font-bold text-white mb-6 md:text-5xl gold-gradient-text">
               Welcome to Elite Truck Driving School
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
               At Elite Truck Driving School, we provide top-tier training for aspiring truck drivers. Our comprehensive programs are designed to equip you with the skills needed for a successful career in the trucking industry. With experienced instructors and state-of-the-art facilities, we're committed to your success on the road.
             </p>
             <div className="flex justify-center mb-12">
-              <img
-                src="https://res.cloudinary.com/dsyf8cltg/image/upload/v1757875404/gallery/ns0pawerpygyra2pnfpc.jpg"
-                className="rounded-lg shadow-lg w-full max-w-4xl object-cover transition-transform duration-500 hover:scale-105"
-              />
+              <div className="gold-border rounded-xl overflow-hidden shine-effect">
+                <img
+                  src="https://res.cloudinary.com/dsyf8cltg/image/upload/v1757875404/gallery/ns0pawerpygyra2pnfpc.jpg"
+                  className="rounded-xl w-full max-w-4xl object-cover transition-transform duration-700 hover:scale-110"
+                  alt="Truck driving school"
+                />
+              </div>
             </div>
             <a
               href="/enroll"
-              className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1 shadow-md hover:shadow-lg"
+              className="inline-block gold-gradient text-black px-10 py-5 rounded-full font-bold hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 shadow-lg gold-border pulse-gold"
             >
               Enroll Now
             </a>
@@ -139,67 +229,69 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section ref={statsRef} className="py-12 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="p-4 animate-pulse-once">
-              <div className="text-4xl font-bold mb-2">{statsInView ? `${statValues.passRate}%` : '0%'}</div>
-              <div className="text-sm">Pass Rate</div>
+      <section ref={statsRef} className="py-20 bg-dark relative overflow-hidden">
+        <div className="absolute inset-0 gold-gradient opacity-10"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border">
+              <div className="text-5xl font-bold mb-2 text-gold">{statsInView ? `${statValues.passRate}%` : '0%'}</div>
+              <div className="text-gray-300 uppercase tracking-wider text-sm font-semibold">Pass Rate</div>
             </div>
-            <div className="p-4 animate-pulse-once" style={{animationDelay: '0.1s'}}>
-              <div className="text-4xl font-bold mb-2">{statsInView ? `${statValues.graduates}+` : '0+'}</div>
-              <div className="text-sm">Graduates</div>
+            <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border" style={{transitionDelay: '0.1s'}}>
+              <div className="text-5xl font-bold mb-2 text-gold">{statsInView ? `${statValues.graduates}+` : '0+'}</div>
+              <div className="text-gray-300 uppercase tracking-wider text-sm font-semibold">Graduates</div>
             </div>
-            <div className="p-4 animate-pulse-once" style={{animationDelay: '0.2s'}}>
-              <div className="text-4xl font-bold mb-2">{statsInView ? `${statValues.jobPlacement}%` : '0%'}</div>
-              <div className="text-sm">Job Placement</div>
+            <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border" style={{transitionDelay: '0.2s'}}>
+              <div className="text-5xl font-bold mb-2 text-gold">{statsInView ? `${statValues.jobPlacement}%` : '0%'}</div>
+              <div className="text-gray-300 uppercase tracking-wider text-sm font-semibold">Job Placement</div>
             </div>
-            <div className="p-4 animate-pulse-once" style={{animationDelay: '0.3s'}}>
-              <div className="text-4xl font-bold mb-2">{statsInView ? statValues.experience : '0'}</div>
-              <div className="text-sm">Years Experience</div>
+            <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border" style={{transitionDelay: '0.3s'}}>
+              <div className="text-5xl font-bold mb-2 text-gold">{statsInView ? statValues.experience : '0'}</div>
+              <div className="text-gray-300 uppercase tracking-wider text-sm font-semibold">Years Experience</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-20 bg-black relative">
+        <div className="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
         <div className="container mx-auto px-4">
           <div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-10 text-center md:text-4xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h2 className="text-3xl font-bold text-white mb-16 text-center md:text-4xl gold-gradient-text">
               Why Choose Elite Truck Driving School?
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-t-4 border-blue-500">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              <div className="bg-darker p-8 rounded-2xl shadow-2xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 gold-border group">
+                <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 gold-border">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2 text-center">Experienced Instructors</h3>
-                <p className="text-gray-600 text-center">
+                <h3 className="text-xl font-semibold text-white mb-4 text-center group-hover:text-gold transition-colors">Experienced Instructors</h3>
+                <p className="text-gray-400 text-center">
                   Our certified instructors have years of real-world trucking experience, ensuring you get practical, hands-on training.
                 </p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-t-4 border-purple-500">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="bg-darker p-8 rounded-2xl shadow-2xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 gold-border group">
+                <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 gold-border">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2 text-center">Modern Fleet</h3>
-                <p className="text-gray-600 text-center">
+                <h3 className="text-xl font-semibold text-white mb-4 text-center group-hover:text-gold transition-colors">Modern Fleet</h3>
+                <p className="text-gray-400 text-center">
                   Train on the latest trucks and equipment, including simulators for safe, effective learning.
                 </p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-t-4 border-blue-500">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="bg-darker p-8 rounded-2xl shadow-2xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 gold-border group">
+                <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 gold-border">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-2 text-center">Job Placement Assistance</h3>
-                <p className="text-gray-600 text-center">
+                <h3 className="text-xl font-semibold text-white mb-4 text-center group-hover:text-gold transition-colors">Job Placement Assistance</h3>
+                <p className="text-gray-400 text-center">
                   We partner with top trucking companies to help you secure employment after graduation.
                 </p>
               </div>
@@ -209,24 +301,25 @@ export default function Home() {
       </section>
 
       {/* Programs Section */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-dark relative">
+        <div className="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
         <div className="container mx-auto px-4">
           <div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-10 text-center md:text-4xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h2 className="text-3xl font-bold text-white mb-16 text-center md:text-4xl gold-gradient-text">
               Our Training Programs
             </h2>
             
             {/* Program Tabs */}
-            <div className="flex justify-center mb-8">
-              <div className="flex flex-wrap justify-center gap-2 bg-gray-100 p-2 rounded-lg">
+            <div className="flex justify-center mb-12">
+              <div className="flex flex-wrap justify-center gap-4 bg-darker p-2 rounded-xl gold-border">
                 {programs.map((program, index) => (
                   <button
                     key={index}
                     onClick={() => setActiveProgram(index)}
-                    className={`px-6 py-3 rounded-md font-semibold transition-all duration-300 ${
+                    className={`px-8 py-4 rounded-xl font-bold transition-all duration-300 ${
                       activeProgram === index 
-                        ? 'bg-blue-600 text-white shadow-md' 
-                        : 'bg-white text-gray-700 hover:bg-blue-50'
+                        ? 'gold-gradient text-black shadow-2xl' 
+                        : 'bg-black text-gray-300 hover:text-gold hover:bg-darker'
                     }`}
                   >
                     {program.title}
@@ -236,27 +329,27 @@ export default function Home() {
             </div>
             
             {/* Program Content */}
-            <div className="bg-gradient-to-b from-blue-50 to-white p-8 rounded-lg shadow-md transition-all duration-500">
-              <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="w-full md:w-1/3 flex justify-center">
-                  <div className="bg-blue-200 rounded-lg p-6 w-64 h-64 flex items-center justify-center">
+            <div className="bg-darker p-10 rounded-3xl shadow-2xl transition-all duration-500 gold-border shine-effect">
+              <div className="flex flex-col md:flex-row items-center gap-12">
+                <div className="w-full md:w-2/5 flex justify-center">
+                  <div className="bg-black rounded-2xl p-10 w-80 h-80 flex items-center justify-center transform transition-all duration-500 hover:scale-105 gold-border">
                     {programs[activeProgram].icon}
                   </div>
                 </div>
-                <div className="w-full md:w-2/3">
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-4">{programs[activeProgram].title}</h3>
-                  <p className="text-gray-600 mb-6">{programs[activeProgram].description}</p>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                <div className="w-full md:w-3/5">
+                  <h3 className="text-3xl font-semibold text-white mb-6 gold-gradient-text">{programs[activeProgram].title}</h3>
+                  <p className="text-gray-400 mb-8 text-lg leading-relaxed">{programs[activeProgram].description}</p>
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                     {programs[activeProgram].details.map((detail, i) => (
-                      <li key={i} className="flex items-center text-gray-700">
-                        <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <li key={i} className="flex items-center text-gray-300">
+                        <svg className="w-6 h-6 text-gold mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                         </svg>
                         {detail}
                       </li>
                     ))}
                   </ul>
-                  <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-md font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1">
+                  <button className="gold-gradient text-black px-10 py-4 rounded-xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg gold-border">
                     Learn More
                   </button>
                 </div>
@@ -267,59 +360,58 @@ export default function Home() {
       </section>
 
       {/* New Features Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50">
+      <section className="py-20 bg-black relative">
+        <div className="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-800 mb-10 text-center md:text-4xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl font-bold text-white mb-16 text-center md:text-4xl gold-gradient-text">
             Our Training Features
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-2 text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-                <svg className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-darker p-8 rounded-2xl shadow-2xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 text-center group gold-border">
+              <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 gold-border">
+                <svg className="h-10 w-10 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Flexible Scheduling</h3>
-              <p className="text-gray-600">Day and evening classes to fit your busy life</p>
+              <h3 className="text-lg font-semibold text-white mb-4 group-hover:text-gold transition-colors">Flexible Scheduling</h3>
+              <p className="text-gray-400">Day and evening classes to fit your busy life</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-2 text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-                <svg className="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="bg-darker p-8 rounded-2xl shadow-2xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 text-center group gold-border">
+              <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 gold-border">
+                <svg className="h-10 w-10 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Financial Aid</h3>
-              <p className="text-gray-600">Options available for those who qualify</p>
+              <h3 className="text-lg font-semibold text-white mb-4 group-hover:text-gold transition-colors">Financial Aid</h3>
+              <p className="text-gray-400">Options available for those who qualify</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-2 text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-                <svg className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="bg-darker p-8 rounded-2xl shadow-2xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 text-center group gold-border">
+              <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 gold-border">
+                <svg className="h-10 w-10 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-9 0H9m2 0h2m2 0h2M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Modern Facilities</h3>
-              <p className="text-gray-600">State-of-the-art classrooms and training areas</p>
+              <h3 className="text-lg font-semibold text-white mb-4 group-hover:text-gold transition-colors">Modern Facilities</h3>
+              <p className="text-gray-400">State-of-the-art classrooms and training areas</p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-2 text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-                <svg className="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="bg-darker p-8 rounded-2xl shadow-2xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 text-center group gold-border">
+              <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 gold-border">
+                <svg className="h-10 w-10 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Fast Track</h3>
-              <p className="text-gray-600">Complete training in as little as 4 weeks</p>
+              <h3 className="text-lg font-semibold text-white mb-4 group-hover:text-gold transition-colors">Fast Track</h3>
+              <p className="text-gray-400">Complete training in as little as 4 weeks</p>
             </div>
           </div>
         </div>
       </section>
 
-    
       {/* Review */}
       <ReviewComponent/>
-
 
       {/* Footer */}
       <Footer />

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { ChevronDownIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { IoIosCall } from "react-icons/io";
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   // Logo dimensions
   const logoWidth = 300;
@@ -149,6 +151,17 @@ export default function Navbar() {
     }
   };
 
+  const isPathActive = (href) => {
+    if (!href || href === '#') return false;
+    if (href === '/') return pathname === '/';
+    return pathname === href || pathname.startsWith(href + '/');
+  };
+
+  const isDropdownParentActive = (dropdown) => {
+    if (!dropdown) return false;
+    return dropdown.some((item) => isPathActive(item.href));
+  };
+
   return (
     <>
       <nav 
@@ -207,7 +220,11 @@ export default function Navbar() {
                 {item.dropdown ? (
                   <div className="relative">
                     <motion.button 
-                      className="flex items-center transition-colors relative px-3 py-2 rounded-lg group text-gray-200 hover:text-yellow-400"
+                      className={`flex items-center transition-colors relative px-3 py-2 rounded-lg group ${
+                        isDropdownParentActive(item.dropdown)
+                          ? 'text-yellow-400'
+                          : 'text-gray-200 hover:text-yellow-400'
+                      }`}
                       whileHover={{ scale: 1.05 }}
                       onClick={() => toggleDropdown(item.name)}
                     >
@@ -246,7 +263,11 @@ export default function Navbar() {
                             >
                               <Link
                                 href={dropdownItem.href}
-                                className="block px-4 py-2 text-gray-200 hover:bg-yellow-500 hover:text-black transition-colors duration-200 font-medium"
+                                className={`block px-4 py-2 transition-colors duration-200 font-medium ${
+                                  isPathActive(dropdownItem.href)
+                                    ? 'text-black bg-yellow-500'
+                                    : 'text-gray-200 hover:bg-yellow-500 hover:text-black'
+                                }`}
                                 onClick={() => setActiveDropdown(null)}
                               >
                                 {dropdownItem.name}
@@ -260,7 +281,11 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={item.href}
-                    className="transition-colors relative py-1 px-3 rounded-lg block group text-gray-200 hover:text-yellow-400"
+                    className={`transition-colors relative py-1 px-3 rounded-lg block group ${
+                      isPathActive(item.href)
+                        ? 'text-yellow-400'
+                        : 'text-gray-200 hover:text-yellow-400'
+                    }`}
                   >
                     <motion.span
                       whileHover={{ 
@@ -271,7 +296,9 @@ export default function Navbar() {
                     >
                       {item.name}
                       <motion.span 
-                        className="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full"
+                        className={`absolute -bottom-1 left-0 h-0.5 transition-all duration-300 ${
+                          isPathActive(item.href) ? 'w-full' : 'w-0 group-hover:w-full'
+                        }`}
                         style={{ backgroundColor: accentColor }}
                       />
                     </motion.span>
@@ -437,7 +464,11 @@ export default function Navbar() {
                         <>
                           <motion.button
                             onClick={() => toggleDropdown(item.name)}
-                            className="flex justify-between items-center w-full text-lg font-medium py-4 border-b border-gray-800 text-gray-200"
+                            className={`flex justify-between items-center w-full text-lg font-medium py-4 border-b border-gray-800 ${
+                              isDropdownParentActive(item.dropdown)
+                                ? 'text-yellow-400'
+                                : 'text-gray-200'
+                            }`}
                             whileHover={{ color: accentColor, x: 5 }}
                             whileTap={{ scale: 0.98 }}
                           >
@@ -471,7 +502,11 @@ export default function Navbar() {
                                   >
                                     <Link
                                       href={dropdownItem.href}
-                                      className="block text-base py-3 text-gray-200 border-b border-gray-800 hover:text-yellow-400 transition-colors duration-200 font-medium"
+                                      className={`block text-base py-3 border-b border-gray-800 transition-colors duration-200 font-medium ${
+                                        isPathActive(dropdownItem.href)
+                                          ? 'text-yellow-400'
+                                          : 'text-gray-200 hover:text-yellow-400'
+                                      }`}
                                       onClick={toggleMenu}
                                     >
                                       {dropdownItem.name}
@@ -485,7 +520,11 @@ export default function Navbar() {
                       ) : (
                         <Link
                           href={item.href}
-                          className="block text-lg font-medium py-4 border-b border-gray-800 text-gray-200 hover:text-yellow-400 transition-colors duration-300"
+                          className={`block text-lg font-medium py-4 border-b border-gray-800 transition-colors duration-300 ${
+                            isPathActive(item.href)
+                              ? 'text-yellow-400'
+                              : 'text-gray-200 hover:text-yellow-400'
+                          }`}
                           onClick={toggleMenu}
                         >
                           <motion.span
@@ -566,11 +605,11 @@ export default function Navbar() {
         {/* Phone icon */}
         <motion.a
           href={`tel:${phoneNumbers[0].number.replace(/\D/g, '')}`}
-          className="flex flex-col items-center p-2 rounded-lg transition-colors duration-200 text-gray-200 hover:text-yellow-400"
+          className="flex flex-col items-center  rounded-lg transition-colors duration-200 text-gray-200 hover:text-yellow-400"
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
         >
-          <IoIosCall className="h-6 w-6" />
+          <IoIosCall className="h-8 w-8 bg-blue-800 rounded-2xl p-1" ></IoIosCall>
           <span className="text-xs mt-1">Call</span>
         </motion.a>
         
