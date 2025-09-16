@@ -11,10 +11,28 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   // Logo dimensions
-  const logoWidth = 200;
+  const logoWidth = 300;
   const logoHeight = 80;
+
+  // Dark black color scheme with popping accents
+  const darkBlack = "#0A0A0A";
+  const mediumBlack = "#1A1A1A";
+  const lightBlack = "#2A2A2A";
+  const accentColor = "#FFD700"; // Golden yellow for maximum pop
+  const secondaryAccent = "#FF6B6B"; // Coral for variety
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const phoneNumbers = [
     { label: 'Official Contact', number: '+91 97812-78770' },
@@ -116,9 +134,34 @@ export default function Navbar() {
     }
   };
 
+  // Text pop animation
+  const textPopVariants = {
+    hidden: { opacity: 0, y: 10, scale: 0.8 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 500,
+        damping: 15
+      }
+    }
+  };
+
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 h-26 bg-white shadow-md">
+      <nav 
+        className={`fixed top-0 left-0 w-full z-50 h-28 transition-all duration-300 ${scrolled ? 'shadow-xl bg-black' : 'shadow-md bg-black'}`}
+      >
+        {/* Glowing top accent line */}
+        <motion.div 
+          className="h-1 w-full bg-gradient-to-r from-transparent via-yellow-500 to-transparent"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        />
+        
         {/* Navbar container */}
         <div className="container mx-auto flex items-center justify-between h-full px-4 md:px-6">
           {/* Logo */}
@@ -131,7 +174,7 @@ export default function Navbar() {
           >
             <motion.div 
               className="relative mr-2"
-              whileHover={{ rotate: [0, -5, 0] }}
+              whileHover={{ rotate: [0, 0, 0] }}
               transition={{ duration: 0.5 }}
               style={{ width: `${logoWidth}px`, height: `${logoHeight}px` }}
             >
@@ -164,18 +207,24 @@ export default function Navbar() {
                 {item.dropdown ? (
                   <div className="relative">
                     <motion.button 
-                      className="flex items-center transition-colors relative px-3 py-2 rounded-lg group text-gray-700 hover:text-blue-600"
+                      className="flex items-center transition-colors relative px-3 py-2 rounded-lg group text-gray-200 hover:text-yellow-400"
                       whileHover={{ scale: 1.05 }}
                       onClick={() => toggleDropdown(item.name)}
                     >
-                      <span className="transition-colors duration-300 font-semibold">
+                      <motion.span
+                        className="relative transition-colors duration-300 font-semibold"
+                        whileHover={{ 
+                          scale: 1.1,
+                          textShadow: "0 0 8px rgba(255,215,0,0.8)"
+                        }}
+                      >
                         {item.name}
-                      </span>
+                      </motion.span>
                       <motion.div
                         animate={{ rotate: activeDropdown === item.name ? 180 : 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <ChevronDownIcon className="ml-1 h-4 w-4 transition-colors duration-300 text-gray-700 group-hover:text-blue-600" />
+                        <ChevronDownIcon className="ml-1 h-4 w-4 transition-colors duration-300 text-gray-200 group-hover:text-yellow-400" />
                       </motion.div>
                     </motion.button>
                     
@@ -186,7 +235,8 @@ export default function Navbar() {
                           initial="hidden"
                           animate="visible"
                           exit="exit"
-                          className="absolute left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200"
+                          className="absolute left-0 mt-1 w-48 rounded-md shadow-lg py-1 z-50 border border-gray-800"
+                          style={{ backgroundColor: mediumBlack }}
                         >
                           {item.dropdown.map((dropdownItem) => (
                             <motion.div
@@ -196,7 +246,7 @@ export default function Navbar() {
                             >
                               <Link
                                 href={dropdownItem.href}
-                                className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                                className="block px-4 py-2 text-gray-200 hover:bg-yellow-500 hover:text-black transition-colors duration-200 font-medium"
                                 onClick={() => setActiveDropdown(null)}
                               >
                                 {dropdownItem.name}
@@ -210,15 +260,19 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={item.href}
-                    className="transition-colors relative py-1 px-3 rounded-lg block group text-gray-700 hover:text-blue-600"
+                    className="transition-colors relative py-1 px-3 rounded-lg block group text-gray-200 hover:text-yellow-400"
                   >
                     <motion.span
-                      whileHover={{ scale: 1.05 }}
+                      whileHover={{ 
+                        scale: 1.1,
+                        textShadow: "0 0 8px rgba(255,215,0,0.8)"
+                      }}
                       className="relative transition-colors duration-300 font-semibold"
                     >
                       {item.name}
                       <motion.span 
-                        className="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-blue-600"
+                        className="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full"
+                        style={{ backgroundColor: accentColor }}
                       />
                     </motion.span>
                   </Link>
@@ -233,8 +287,13 @@ export default function Navbar() {
             <div className="relative">
               <motion.button
                 onClick={() => setIsPhoneOpen(!isPhoneOpen)}
-                className="p-2 rounded-full shadow-sm transition-colors text-blue-600 hover:text-blue-800 bg-white border border-gray-200"
-                whileHover={{ scale: 1.1, y: -2 }}
+                className="p-2 rounded-full shadow-sm transition-colors text-yellow-400 hover:text-yellow-200"
+                style={{ backgroundColor: mediumBlack }}
+                whileHover={{ 
+                  scale: 1.1, 
+                  y: -2,
+                  boxShadow: "0 0 15px rgba(255,215,0,0.5)"
+                }}
                 whileTap={{ scale: 0.9 }}
               >
                 <IoIosCall className="h-5 w-5" />
@@ -247,16 +306,17 @@ export default function Navbar() {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200"
+                    className="absolute right-0 mt-2 w-56 rounded-md shadow-lg py-1 z-50 border border-gray-800"
+                    style={{ backgroundColor: mediumBlack }}
                   >
-                    <div className="px-4 py-2 font-medium text-gray-800 border-b border-gray-200 bg-gray-50">
+                    <div className="px-4 py-2 font-medium text-yellow-400 border-b border-gray-800 bg-black">
                       Contact Numbers
                     </div>
                     {phoneNumbers.map((phone, index) => (
                       <motion.a
                         key={index}
                         href={`tel:${phone.number.replace(/\D/g, '')}`}
-                        className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                        className="block px-4 py-2 text-gray-200   transition-colors duration-200 font-medium"
                         initial={{ opacity: 0, x: 10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
@@ -264,7 +324,7 @@ export default function Navbar() {
                         onClick={() => setIsPhoneOpen(false)}
                       >
                         <div className="font-medium">{phone.label}</div>
-                        <div className="text-blue-600">{phone.number}</div>
+                        <div className="text-yellow-400">{phone.number}</div>
                       </motion.a>
                     ))}
                   </motion.div>
@@ -279,7 +339,8 @@ export default function Navbar() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-2 rounded-full shadow-sm transition-all duration-300 bg-white border border-gray-200 text-gray-600 ${social.color}`}
+                className={`p-2 rounded-full shadow-sm transition-colors text-yellow-400 hover:text-yellow-200`}
+                style={{ backgroundColor: mediumBlack }}
                 variants={socialIconVariants}
                 initial="rest"
                 whileHover="hover"
@@ -293,11 +354,15 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="lg:hidden focus:outline-none z-50 p-2 rounded-lg shadow-sm transition-colors bg-white border border-gray-200 text-gray-700"
+            className="lg:hidden focus:outline-none z-50 p-2 rounded-lg shadow-sm transition-colors text-yellow-400"
+            style={{ backgroundColor: mediumBlack }}
             onClick={toggleMenu}
             whileTap={{ scale: 0.95 }}
             aria-label="Toggle menu"
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ 
+              scale: 1.1,
+              boxShadow: "0 0 15px rgba(255,215,0,0.5)"
+            }}
           >
             <motion.div
               animate={isOpen ? "open" : "closed"}
@@ -312,6 +377,13 @@ export default function Navbar() {
             </motion.div>
           </motion.button>
         </div>
+                {/* Glowing top accent line */}
+          <motion.div 
+          className="h-1 w-full bg-gradient-to-r -mt-2 from-transparent via-yellow-500 to-transparent"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        />
 
         {/* Mobile Menu */}
         <AnimatePresence>
@@ -323,7 +395,7 @@ export default function Navbar() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className="fixed inset-0 bg-black/60 lg:hidden z-40"
+                className="fixed inset-0 bg-black/90 lg:hidden z-40"
                 onClick={toggleMenu}
               />
               
@@ -333,7 +405,8 @@ export default function Navbar() {
                 initial="closed"
                 animate="open"
                 exit="closed"
-                className="fixed top-0 right-0 w-full max-w-sm h-full bg-white text-black flex flex-col z-40 shadow-2xl border-l border-gray-200"
+                className="fixed top-0 right-0 w-full max-w-sm h-full flex flex-col z-40 shadow-2xl border-l border-gray-800"
+                style={{ backgroundColor: darkBlack }}
               >
                 <div className="flex-1 overflow-y-auto pt-20 pb-24 px-6">
                   <div className="flex justify-between items-center mb-8">
@@ -364,18 +437,18 @@ export default function Navbar() {
                         <>
                           <motion.button
                             onClick={() => toggleDropdown(item.name)}
-                            className="flex justify-between items-center w-full text-lg font-medium py-4 border-b border-gray-200 text-gray-800"
-                            whileHover={{ color: "#2563eb", x: 5 }}
+                            className="flex justify-between items-center w-full text-lg font-medium py-4 border-b border-gray-800 text-gray-200"
+                            whileHover={{ color: accentColor, x: 5 }}
                             whileTap={{ scale: 0.98 }}
                           >
-                            <span className="hover:text-blue-600 transition-colors duration-300">
+                            <span className="hover:text-yellow-400 transition-colors duration-300">
                               {item.name}
                             </span>
                             <motion.div
                               animate={{ rotate: activeDropdown === item.name ? 180 : 0 }}
                               transition={{ duration: 0.3 }}
                             >
-                              <ChevronDownIcon className="h-5 w-5 hover:text-blue-600 transition-colors duration-300" />
+                              <ChevronDownIcon className="h-5 w-5 hover:text-yellow-400 transition-colors duration-300" />
                             </motion.div>
                           </motion.button>
                           
@@ -386,7 +459,8 @@ export default function Navbar() {
                                 animate={{ opacity: 1, height: 'auto' }}
                                 exit={{ opacity: 0, height: 0 }}
                                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                                className="pl-4 border-l-2 border-blue-600 ml-2 bg-blue-50 rounded-r-lg"
+                                className="pl-4 border-l-2 ml-2 rounded-r-lg"
+                                style={{ borderColor: accentColor, backgroundColor: mediumBlack }}
                               >
                                 {item.dropdown.map((dropdownItem, dIndex) => (
                                   <motion.div
@@ -397,7 +471,7 @@ export default function Navbar() {
                                   >
                                     <Link
                                       href={dropdownItem.href}
-                                      className="block text-base py-3 text-gray-700 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200"
+                                      className="block text-base py-3 text-gray-200 border-b border-gray-800 hover:text-yellow-400 transition-colors duration-200 font-medium"
                                       onClick={toggleMenu}
                                     >
                                       {dropdownItem.name}
@@ -411,7 +485,7 @@ export default function Navbar() {
                       ) : (
                         <Link
                           href={item.href}
-                          className="block text-lg font-medium py-4 border-b border-gray-200 text-gray-800 hover:text-blue-600 transition-colors duration-300"
+                          className="block text-lg font-medium py-4 border-b border-gray-800 text-gray-200 hover:text-yellow-400 transition-colors duration-300"
                           onClick={toggleMenu}
                         >
                           <motion.span
@@ -427,18 +501,19 @@ export default function Navbar() {
                   
                   {/* Phone Numbers in Mobile Menu */}
                   <motion.div 
-                    className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200"
+                    className="mt-8 p-4 rounded-lg border border-gray-800"
+                    style={{ backgroundColor: mediumBlack }}
                     variants={itemVariants}
                     transition={{ delay: 0.3 }}
                   >
-                    <div className="text-lg font-medium text-blue-800 mb-3">
+                    <div className="text-lg font-medium text-yellow-400 mb-3">
                       Contact Numbers
                     </div>
                     {phoneNumbers.map((phone, index) => (
                       <motion.a
                         key={index}
                         href={`tel:${phone.number.replace(/\D/g, '')}`}
-                        className="block py-2 text-gray-700 hover:text-blue-600 transition-colors duration-200"
+                        className="block py-2 text-gray-200 hover:text-yellow-400 transition-colors duration-200 font-medium"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 + (index * 0.1) }}
@@ -446,7 +521,7 @@ export default function Navbar() {
                         onClick={toggleMenu}
                       >
                         <div className="font-medium">{phone.label}</div>
-                        <div className="text-blue-600">{phone.number}</div>
+                        <div className="text-yellow-400">{phone.number}</div>
                       </motion.a>
                     ))}
                   </motion.div>
@@ -480,17 +555,18 @@ export default function Navbar() {
         </AnimatePresence>
       </nav>
       
-      {/* Mobile Social Bar - Now with consistent styling */}
+      {/* Mobile Social Bar */}
       <motion.div 
-        className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-3 px-4 z-40 flex justify-around items-center shadow-lg"
+        className="lg:hidden fixed bottom-0 left-0 right-0 py-3 px-4 z-40 flex justify-around items-center shadow-lg border-t border-gray-800"
+        style={{ backgroundColor: darkBlack }}
         initial={{ y: 100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", damping: 20, stiffness: 200 }}
       >
-        {/* Phone icon with consistent styling */}
+        {/* Phone icon */}
         <motion.a
           href={`tel:${phoneNumbers[0].number.replace(/\D/g, '')}`}
-          className="flex flex-col items-center p-2 rounded-lg transition-colors duration-200  text-blue-600 hover:text-blue-800 hover:bg-gray-50"
+          className="flex flex-col items-center p-2 rounded-lg transition-colors duration-200 text-gray-200 hover:text-yellow-400"
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -498,14 +574,14 @@ export default function Navbar() {
           <span className="text-xs mt-1">Call</span>
         </motion.a>
         
-        {/* Social icons with same styling as phone icon */}
+        {/* Social icons */}
         {socialLinks.map((social) => (
           <motion.a
             key={social.name}
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center p-2 rounded-lg transition-colors duration-200  text-gray-600 hover:text-white hover:bg-gray-50"
+            className="flex flex-col items-center p-2 rounded-lg transition-colors duration-200 text-gray-200 hover:text-yellow-400"
             whileHover={{ scale: 1.1, y: -2 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -517,8 +593,10 @@ export default function Navbar() {
         ))}
       </motion.div>
       
+      
       {/* Padding to account for fixed navbar */}
-      <div className="pt-30 lg:pt-16"></div>
+      <div className="pt-22 lg:pt-16"></div>
+      
     </>
   );
 }
