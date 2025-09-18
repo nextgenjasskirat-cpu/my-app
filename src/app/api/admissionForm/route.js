@@ -2,10 +2,20 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request) {
   try {
-    const { name, email, message } = await request.json();
+    const { 
+      name, 
+      email, 
+      phone, 
+      address, 
+      experience, 
+      licenseType, 
+      message, 
+      agreeToTerms 
+    } = await request.json();
 
-    if (!name || !email || !message) {
-      return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
+    // Validate required fields
+    if (!name || !email || !phone || !address || !agreeToTerms) {
+      return NextResponse.json({ error: 'All required fields must be filled out' }, { status: 400 });
     }
 
     if (!process.env.RESEND_API_KEY) {
@@ -23,15 +33,20 @@ export async function POST(request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Form Submission <onboarding@resend.dev>',
+        from: 'Admission Form <onboarding@resend.dev>',
         to: [process.env.ADMIN_EMAIL],
-        subject: `New Form Submission from ${name}`,
+        subject: `New Admission Application from ${name}`,
         html: `
-          <h2>New Contact Form Submission</h2>
+          <h2>New Admission Application Submission</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong> ${message}</p>
-          <p><em>This email was sent from your website contact form.</em></p>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>Address:</strong> ${address}</p>
+          <p><strong>Driving Experience:</strong> ${experience}</p>
+          <p><strong>Desired License Type:</strong> ${licenseType}</p>
+          <p><strong>Additional Information:</strong> ${message || 'None provided'}</p>
+          <p><strong>Agreed to Terms:</strong> ${agreeToTerms ? 'Yes' : 'No'}</p>
+          <p><em>This email was sent from your website admission form.</em></p>
         `,
       }),
     });
@@ -49,10 +64,11 @@ export async function POST(request) {
 
     const data = await response.json();
     return NextResponse.json(
-      { message: 'Form submitted successfully', id: data?.id },
+      { message: 'Application submitted successfully', id: data?.id },
       { status: 200 }
     );
   } catch (error) {
+    console.error('Admission form error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

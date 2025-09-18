@@ -204,7 +204,7 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h2 className="text-4xl font-bold text-white mb-6 md:text-5xl gold-gradient-text">
-              Welcome to Elite Truck Driving School
+              Welcome to NextGen Truck Driving School
             </h2>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
               At Elite Truck Driving School, we provide top-tier training for aspiring truck drivers. Our comprehensive programs are designed to equip you with the skills needed for a successful career in the trucking industry. With experienced instructors and state-of-the-art facilities, we're committed to your success on the road.
@@ -229,22 +229,20 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section ref={statsRef} className="py-20 bg-dark relative overflow-hidden">
+      <section ref={statsRef} className="py-20 bg-dark relative overflow-hidden flex ">
         <div className="absolute inset-0 gold-gradient opacity-10"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
             <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border">
               <div className="text-5xl font-bold mb-2 text-gold">{statsInView ? `${statValues.passRate}%` : '0%'}</div>
               <div className="text-gray-300 uppercase tracking-wider text-sm font-semibold">Pass Rate</div>
             </div>
+            
             <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border" style={{transitionDelay: '0.1s'}}>
               <div className="text-5xl font-bold mb-2 text-gold">{statsInView ? `${statValues.graduates}+` : '0+'}</div>
               <div className="text-gray-300 uppercase tracking-wider text-sm font-semibold">Graduates</div>
             </div>
-            <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border" style={{transitionDelay: '0.2s'}}>
-              <div className="text-5xl font-bold mb-2 text-gold">{statsInView ? `${statValues.jobPlacement}%` : '0%'}</div>
-              <div className="text-gray-300 uppercase tracking-wider text-sm font-semibold">Job Placement</div>
-            </div>
+           
             <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border" style={{transitionDelay: '0.3s'}}>
               <div className="text-5xl font-bold mb-2 text-gold">{statsInView ? statValues.experience : '0'}</div>
               <div className="text-gray-300 uppercase tracking-wider text-sm font-semibold">Years Experience</div>

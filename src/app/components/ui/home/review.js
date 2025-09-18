@@ -104,7 +104,7 @@ export default function ReviewComponent() {
         {[1, 2, 3, 4, 5].map((star) => (
           <svg
             key={star}
-            className={`w-5 h-5 ${star <= rating ? 'text-yellow-400' : 'text-gray-500'} 
+            className={`w-5 h-5 ${star <= rating ? 'text-yellow-400' : 'text-gray-600'} 
               transition-all duration-300 ${star <= rating ? 'scale-110' : ''}`}
             fill="currentColor"
             viewBox="0 0 20 20"
@@ -112,7 +112,7 @@ export default function ReviewComponent() {
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
           </svg>
         ))}
-        <span className="ml-2 text-sm font-medium text-gray-300">{rating.toFixed(1)}</span>
+        <span className="ml-2 text-sm font-medium text-gray-400">{rating.toFixed(1)}</span>
       </div>
     );
   };
@@ -125,10 +125,11 @@ export default function ReviewComponent() {
             key={star}
             type="button"
             onClick={() => onChange(star)}
-            className="focus:outline-none"
+            className="focus:outline-none transition-transform hover:scale-110"
+            aria-label={`Rate ${star} star${star !== 1 ? 's' : ''}`}
           >
             <svg
-              className={`w-8 h-8 cursor-pointer transition-all duration-300 ${star <= value ? 'text-yellow-400 transform scale-110' : 'text-gray-500'} hover:scale-110`}
+              className={`w-8 h-8 cursor-pointer transition-all duration-300 ${star <= value ? 'text-yellow-400 transform scale-110' : 'text-gray-600'}`}
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -136,7 +137,7 @@ export default function ReviewComponent() {
             </svg>
           </button>
         ))}
-        <span className="ml-2 text-sm font-medium text-gray-300">{value}.0</span>
+        <span className="ml-2 text-sm font-medium text-gray-400">{value}.0</span>
       </div>
     );
   };
@@ -145,20 +146,18 @@ export default function ReviewComponent() {
     if (!showConfirmation) return null;
     
     return (
-      <div className="fixed top-4 right-4 z-50 animate-slide-in">
-        <div className={`rounded-lg p-4 shadow-lg border-l-4 ${
-          confirmationType === 'success' 
-            ? 'bg-green-900 border-green-500 text-green-200' 
-            : 'bg-red-900 border-red-500 text-red-200'
-        }`}>
+      <div className="fixed top-4 right-4 z-50 animate-fade-in-up">
+        <div className={`rounded-lg p-4 shadow-lg border-l-4 ${confirmationType === 'success' 
+          ? 'bg-black border-yellow-500 text-gray-200' 
+          : 'bg-black border-red-500 text-gray-200'}`}>
           <div className="flex items-start">
             <div className="flex-shrink-0">
               {confirmationType === 'success' ? (
-                <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <svg className="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
               ) : (
-                <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <svg className="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                 </svg>
               )}
@@ -172,9 +171,10 @@ export default function ReviewComponent() {
                   onClick={() => setShowConfirmation(false)}
                   className={`inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                     confirmationType === 'success' 
-                      ? 'bg-green-900 text-green-200 hover:bg-green-800 focus:ring-green-400 focus:ring-offset-green-900' 
-                      : 'bg-red-900 text-red-200 hover:bg-red-800 focus:ring-red-400 focus:ring-offset-red-900'
+                      ? 'bg-black text-gray-200 hover:bg-gray-900 focus:ring-yellow-500' 
+                      : 'bg-black text-gray-200 hover:bg-gray-900 focus:ring-red-500'
                   }`}
+                  aria-label="Close notification"
                 >
                   <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -190,14 +190,17 @@ export default function ReviewComponent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-yellow-500 mb-4"></div>
+          <p className="text-gray-400">Loading reviews...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-black py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <Head>
         <title>Customer Reviews</title>
         <meta name="description" content="Share your experience with us" />
@@ -206,24 +209,28 @@ export default function ReviewComponent() {
       <ConfirmationPopup />
 
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-blue-400 mb-4 animate-pulse">Reviews</h1>
-          <p className="text-lg text-gray-300 mb-8">See what our customers are saying about us</p>
+        <div className="text-center mb-12 border-b border-gray-800 pb-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4 animate-fade-in-up bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
+            Customer Reviews
+          </h1>
+          <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+            See what our customers are saying about their experience with us
+          </p>
           
           <button
             onClick={() => setShowForm(!showForm)}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center mx-auto"
+            className="bg-gray-900 text-gray-100 hover:text-yellow-400 font-medium py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center mx-auto border-2 border-yellow-600 hover:border-yellow-500 group"
           >
             {showForm ? (
               <>
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 mr-2 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
                 Cancel Review
               </>
             ) : (
               <>
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 mr-2 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
                 Add Your Review
@@ -233,8 +240,16 @@ export default function ReviewComponent() {
         </div>
 
         {showForm && (
-          <div className="bg-gray-800 rounded-2xl shadow-xl p-8 mb-12 animate-fade-in border border-gray-700">
-            <h2 className="text-2xl font-bold text-white mb-6">Share Your Experience</h2>
+          <div className="bg-gray-900 rounded-xl p-6 md:p-8 mb-12 animate-fade-in-up border-2 border-yellow-600 shadow-lg relative overflow-visible z-10">
+            {/* Decorative elements */}
+            <div className="absolute -top-3 -left-3 w-6 h-6 rounded-full bg-yellow-500 animate-pulse"></div>
+            <div className="absolute -bottom-3 -right-3 w-6 h-6 rounded-full bg-yellow-500 animate-pulse"></div>
+            <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-yellow-500 animate-pulse"></div>
+            <div className="absolute -bottom-3 -left-3 w-6 h-6 rounded-full bg-yellow-500 animate-pulse"></div>
+            
+            <h2 className="text-2xl font-bold text-gray-100 mb-6 text-center">
+              Share Your Experience
+            </h2>
             <form onSubmit={handleSubmitReview} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
@@ -242,7 +257,7 @@ export default function ReviewComponent() {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-white"
+                  className="w-full px-4 py-3 bg-gray-800 text-gray-100 border-2 border-gray-700 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors duration-200 placeholder-gray-500"
                   required
                   placeholder="Enter your name"
                 />
@@ -250,10 +265,12 @@ export default function ReviewComponent() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">Your Rating</label>
-                <RatingInput 
-                  value={formData.rating} 
-                  onChange={(rating) => setFormData({...formData, rating})} 
-                />
+                <div className="p-4 bg-gray-800 rounded-lg border border-gray-700">
+                  <RatingInput 
+                    value={formData.rating} 
+                    onChange={(rating) => setFormData({...formData, rating})} 
+                  />
+                </div>
               </div>
 
               <div>
@@ -262,50 +279,72 @@ export default function ReviewComponent() {
                   value={formData.review}
                   onChange={(e) => setFormData({...formData, review: e.target.value})}
                   rows="4"
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-white"
+                  className="w-full px-4 py-3 bg-gray-800 text-gray-100 border-2 border-gray-700 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-colors duration-200 placeholder-gray-500"
                   required
-                  placeholder="Share your experience..."
+                  placeholder="Share your experience with our product/service..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 flex items-center justify-center"
+                className="w-full bg-yellow-600 text-gray-900 hover:bg-yellow-500 font-medium py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 flex items-center justify-center border-2 border-yellow-500 group"
               >
                 {isSubmitting ? (
                   <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                     Submitting...
                   </>
-                ) : 'Submit Review'}
+                ) : (
+                  <>
+                    Submit Review
+                    <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </>
+                )}
               </button>
             </form>
           </div>
         )}
 
+        <div className="mb-8 flex justify-between items-center">
+          <h2 className="text-2xl font-bold text-gray-100">
+            Customer Feedback <span className="text-yellow-400">({reviews.length})</span>
+          </h2>
+          {reviews.length > 0 && (
+            <div className="text-sm text-gray-400">
+              Showing {displayedReviews.length} of {reviews.length} reviews
+            </div>
+          )}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {displayedReviews.map((review, index) => (
             <div 
               key={review._id} 
-              className="bg-gray-800 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in flex flex-col border border-gray-700"
+              className="bg-gray-900 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in-up flex flex-col border border-gray-800 group"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="p-6 flex-grow">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-white">{review.name}</h3>
+                    <h3 className="text-xl font-semibold text-gray-100 group-hover:text-yellow-400 transition-colors">
+                      {review.name}
+                    </h3>
                   </div>
                   <StarRating rating={review.rating} />
                 </div>
                 
-                <p className="text-gray-300 mb-6 line-clamp-4">{review.review}</p>
+                <p className="text-gray-400 mb-6 line-clamp-4 group-hover:text-gray-300 transition-colors">
+                  {review.review}
+                </p>
               </div>
               
-              <div className="px-6 py-4 bg-gray-700 border-t border-gray-600">
+              <div className="px-6 py-4 bg-gray-800 border-t border-gray-700">
                 <div className="text-sm text-gray-400">
                   {new Date(review.createdAt).toLocaleDateString('en-US', { 
                     year: 'numeric', 
@@ -319,13 +358,13 @@ export default function ReviewComponent() {
         </div>
 
         {hasMoreReviews && (
-          <div className="text-center">
+          <div className="text-center border-t border-gray-800 pt-8">
             <button
               onClick={handleLoadMore}
-              className="bg-gray-800 text-blue-400 border border-blue-500 hover:bg-blue-600 hover:text-white font-medium py-3 px-8 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center mx-auto"
+              className="bg-gray-900 text-gray-100 border-2 border-yellow-600 hover:text-yellow-400 font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center mx-auto hover:border-yellow-500 group"
             >
               Load More Reviews
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
@@ -333,76 +372,33 @@ export default function ReviewComponent() {
         )}
 
         {!hasMoreReviews && reviews.length > 0 && (
-          <div className="text-center py-6">
-            <p className="text-gray-400">You've reached the end of all reviews.</p>
+          <div className="text-center py-6 border-t border-gray-800">
+            <p className="text-gray-400 flex items-center justify-center">
+              <svg className="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              You've reached the end of all reviews.
+            </p>
           </div>
         )}
 
         {reviews.length === 0 && (
-          <div className="text-center py-16 bg-gray-800 rounded-2xl shadow-md border border-gray-700">
+          <div className="text-center py-16 bg-gray-900 rounded-xl shadow-md border border-gray-800">
             <div className="text-gray-500 mb-4">
               <svg className="mx-auto h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
               </svg>
             </div>
-            <p className="text-gray-400 text-lg mb-4">No reviews yet. Be the first to share your experience!</p>
+            <p className="text-gray-300 text-lg mb-4">No reviews yet. Be the first to share your experience!</p>
             <button
               onClick={() => setShowForm(true)}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-2 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300"
+              className="bg-gray-900 text-gray-100 hover:text-yellow-400 font-medium py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border-2 border-yellow-600 hover:border-yellow-500"
             >
               Write a Review
             </button>
           </div>
         )}
       </div>
-
-      <style jsx global>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes slide-in {
-          from { opacity: 0; transform: translateX(100%); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes pulse {
-          0% { opacity: 1; }
-          50% { opacity: 0.7; }
-          100% { opacity: 1; }
-        }
-        
-        .animate-fade-in {
-          opacity: 0;
-          animation: fade-in 0.6s ease-out forwards;
-        }
-        
-        .animate-slide-in {
-          animation: slide-in 0.3s ease-out forwards;
-        }
-        
-        .animate-pulse {
-          animation: pulse 2s infinite;
-        }
-        
-        @keyframes glow {
-          0% { filter: drop-shadow(0 0 2px rgba(255, 204, 0, 0.6)); }
-          50% { filter: drop-shadow(0 0 6px rgba(255, 204, 0, 0.8)); }
-          100% { filter: drop-shadow(0 0 2px rgba(255, 204, 0, 0.6)); }
-        }
-        
-        .text-yellow-400 {
-          animation: glow 2s infinite;
-        }
-        
-        .line-clamp-4 {
-          display: -webkit-box;
-          -webkit-line-clamp: 4;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-      `}</style>
     </div>
   );
 }

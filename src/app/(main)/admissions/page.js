@@ -1,6 +1,8 @@
 "use client"
 import { useState } from 'react';
 import Head from 'next/head';
+import { FaTruck, FaChalkboardTeacher, FaUserTie, FaCheckCircle, FaWhatsapp } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
 
 export default function AdmissionForm() {
   const [formData, setFormData] = useState({
@@ -31,7 +33,7 @@ export default function AdmissionForm() {
     setSubmitMessage('');
 
     try {
-      const response = await fetch('/api/admission', {
+      const response = await fetch('/api/admissionForm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +67,7 @@ export default function AdmissionForm() {
   };
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = "1234567890"; // Replace with your school's WhatsApp number
+    const phoneNumber = "9781278770";
     const message = `Hello, I'm interested in enrolling at NextGen Truck Driving School. I just submitted my application. My name is ${formData.name}.`;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
@@ -85,14 +87,14 @@ export default function AdmissionForm() {
 
       <div className="min-h-screen bg-black text-gray-200">
         {/* Hero Section */}
-        <section className="relative py-20 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-900 opacity-90"></div>
+        <section className="relative py-20 overflow-hidden bg-gradient-to-br from-black to-black">
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
           <div className="relative container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 Launch Your <span className="text-yellow-500">Trucking Career</span>
               </h1>
-              <p className="text-xl mb-8 animate-fade-in-up">
+              <p className="text-xl mb-8 text-gray-300">
                 Join NextGen Truck Driving School and get the high-quality training you need to succeed in the transportation industry.
               </p>
             </div>
@@ -106,35 +108,41 @@ export default function AdmissionForm() {
               Why Choose <span className="text-yellow-500">NextGen</span>?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-gray-900 p-6 rounded-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20">
-                <div className="text-yellow-500 text-4xl mb-4">🚛</div>
-                <h3 className="text-xl font-semibold mb-2">Modern Fleet</h3>
-                <p>Train on state-of-the-art trucks with the latest technology and safety features.</p>
+              <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/10">
+                <div className="text-yellow-500 text-3xl mb-4 flex justify-center">
+                  <FaTruck />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-center">Modern Fleet</h3>
+                <p className="text-gray-300 text-center">Train on state-of-the-art trucks with the latest technology and safety features.</p>
               </div>
-              <div className="bg-gray-900 p-6 rounded-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20">
-                <div className="text-yellow-500 text-4xl mb-4">👨‍🏫</div>
-                <h3 className="text-xl font-semibold mb-2">Expert Instructors</h3>
-                <p>Learn from industry veterans with years of professional driving experience.</p>
+              <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/10">
+                <div className="text-yellow-500 text-3xl mb-4 flex justify-center">
+                  <FaChalkboardTeacher />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-center">Expert Instructors</h3>
+                <p className="text-gray-300 text-center">Learn from industry veterans with years of professional driving experience.</p>
               </div>
-              <div className="bg-gray-900 p-6 rounded-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20">
-                <div className="text-yellow-500 text-4xl mb-4">📋</div>
-                <h3 className="text-xl font-semibold mb-2">Job Placement</h3>
-                <p>Our graduates enjoy excellent job placement rates with top trucking companies.</p>
+              <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/10">
+                <div className="text-yellow-500 text-3xl mb-4 flex justify-center">
+                  <FaUserTie />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-center">Job Placement</h3>
+                <p className="text-gray-300 text-center">Our graduates enjoy excellent job placement rates with top trucking companies.</p>
               </div>
             </div>
           </div>
         </section>
 
         {/* Form Section */}
-        <section className="py-16">
+        <section className="py-16 bg-black">
           <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto bg-gray-900 rounded-xl shadow-2xl overflow-hidden animate-fade-in-up">
-              <div className="bg-yellow-500 py-3">
+            <div className="max-w-2xl mx-auto bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
+              <div className="bg-yellow-500 py-4">
                 <h2 className="text-2xl font-bold text-black text-center">Admission Application</h2>
               </div>
               <div className="p-6 md:p-8">
                 {submitMessage && (
-                  <div className={`p-4 mb-6 rounded-lg ${submitMessage.includes('successfully') ? 'bg-green-900 text-green-200' : 'bg-red-900 text-red-200'}`}>
+                  <div className={`p-4 mb-6 rounded-lg ${submitMessage.includes('successfully') ? 'bg-green-900 text-green-200 border border-green-700' : 'bg-red-900 text-red-200 border border-red-700'}`}>
                     {submitMessage}
                   </div>
                 )}
@@ -148,7 +156,7 @@ export default function AdmissionForm() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-black border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
                       placeholder="Enter your full name"
                     />
                   </div>
@@ -162,7 +170,7 @@ export default function AdmissionForm() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-black border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
                       placeholder="Enter your email address"
                     />
                   </div>
@@ -176,7 +184,7 @@ export default function AdmissionForm() {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-black border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
                       placeholder="Enter your phone number"
                     />
                   </div>
@@ -190,7 +198,7 @@ export default function AdmissionForm() {
                       onChange={handleChange}
                       required
                       rows="3"
-                      className="w-full px-4 py-3 bg-black border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
                       placeholder="Enter your full address"
                     ></textarea>
                   </div>
@@ -203,7 +211,7 @@ export default function AdmissionForm() {
                         name="experience"
                         value={formData.experience}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-black border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
                       >
                         <option value="none">No experience</option>
                         <option value="some">Some experience</option>
@@ -218,7 +226,7 @@ export default function AdmissionForm() {
                         name="licenseType"
                         value={formData.licenseType}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-black border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
                       >
                         <option value="class-c">Class C</option>
                         <option value="class-b">Class B</option>
@@ -235,7 +243,7 @@ export default function AdmissionForm() {
                       value={formData.message}
                       onChange={handleChange}
                       rows="4"
-                      className="w-full px-4 py-3 bg-black border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
                       placeholder="Tell us about your career goals or any questions you may have"
                     ></textarea>
                   </div>
@@ -249,10 +257,10 @@ export default function AdmissionForm() {
                         checked={formData.agreeToTerms}
                         onChange={handleChange}
                         required
-                        className="w-4 h-4 bg-black border border-gray-800 rounded focus:ring-3 focus:ring-yellow-500"
+                        className="w-4 h-4 bg-gray-700 border border-gray-600 rounded focus:ring-3 focus:ring-yellow-500"
                       />
                     </div>
-                    <label htmlFor="agreeToTerms" className="ml-3 text-sm">
+                    <label htmlFor="agreeToTerms" className="ml-3 text-sm text-gray-300">
                       I agree to the processing of my personal data according to the Privacy Policy
                     </label>
                   </div>
@@ -260,9 +268,22 @@ export default function AdmissionForm() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 px-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-3 px-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-lg transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        <FaCheckCircle className="mr-2" />
+                        Submit Application
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
@@ -272,20 +293,32 @@ export default function AdmissionForm() {
 
         {/* WhatsApp Popup */}
         {showWhatsAppPopup && (
-          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 animate-fade-in">
-            <div className="bg-gray-900 p-6 rounded-lg max-w-md w-full mx-4 transform transition-transform duration-300 animate-scale-in">
-              <h3 className="text-xl font-bold mb-4 text-yellow-500">Connect with us on WhatsApp</h3>
-              <p className="mb-6">Would you like to start a conversation with our admissions team on WhatsApp? We're here to answer any questions you may have!</p>
-              <div className="flex space-x-4">
+          <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="bg-gray-800 p-6 rounded-lg max-w-md w-full border border-gray-700 relative">
+              <button 
+                onClick={() => setShowWhatsAppPopup(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white"
+              >
+                <IoClose size={24} />
+              </button>
+              <div className="flex items-center mb-4">
+                <div className="bg-green-600 p-3 rounded-full mr-4">
+                  <FaWhatsapp className="text-white text-2xl" />
+                </div>
+                <h3 className="text-xl font-bold text-yellow-500">Connect with us on WhatsApp</h3>
+              </div>
+              <p className="mb-6 text-gray-300">Would you like to start a conversation with our admissions team on WhatsApp? We're here to answer any questions you may have!</p>
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={handleWhatsAppClick}
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors duration-300"
+                  className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center"
                 >
+                  <FaWhatsapp className="mr-2" />
                   Open WhatsApp
                 </button>
                 <button
                   onClick={() => setShowWhatsAppPopup(false)}
-                  className="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-lg transition-colors duration-300"
+                  className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 rounded-lg transition-colors duration-300"
                 >
                   Maybe Later
                 </button>
@@ -299,17 +332,17 @@ export default function AdmissionForm() {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
             <div className="max-w-3xl mx-auto space-y-6">
-              <div className="bg-gray-900 p-6 rounded-lg transform transition-transform duration-300 hover:scale-[1.02]">
+              <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
                 <h3 className="text-xl font-semibold mb-2 text-yellow-500">How long does the training program take?</h3>
-                <p>Our comprehensive program typically takes 4-6 weeks to complete, depending on the license class and your prior experience.</p>
+                <p className="text-gray-300">Our comprehensive program typically takes 4-6 weeks to complete, depending on the license class and your prior experience.</p>
               </div>
-              <div className="bg-gray-900 p-6 rounded-lg transform transition-transform duration-300 hover:scale-[1.02]">
+              <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
                 <h3 className="text-xl font-semibold mb-2 text-yellow-500">What are the requirements to enroll?</h3>
-                <p>You must be at least 18 years old, have a valid driver's license, and pass a Department of Transportation physical examination.</p>
+                <p className="text-gray-300">You must be at least 18 years old, have a valid driver's license, and pass a Department of Transportation physical examination.</p>
               </div>
-              <div className="bg-gray-900 p-6 rounded-lg transform transition-transform duration-300 hover:scale-[1.02]">
+              <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
                 <h3 className="text-xl font-semibold mb-2 text-yellow-500">Do you offer financial assistance?</h3>
-                <p>Yes, we have several financing options available and work with various funding sources including VA benefits and workforce development programs.</p>
+                <p className="text-gray-300">Yes, we have several financing options available and work with various funding sources including VA benefits and workforce development programs.</p>
               </div>
             </div>
           </div>
@@ -325,26 +358,8 @@ export default function AdmissionForm() {
       </div>
 
       <style jsx global>{`
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scale-in {
-          from { transform: scale(0.9); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
-        }
-        .animate-fade-in {
-          animation: fade-in 1s ease-out;
-        }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out;
-        }
-        .animate-scale-in {
-          animation: scale-in 0.3s ease-out;
+        .bg-grid-pattern {
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
         }
       `}</style>
     </>
