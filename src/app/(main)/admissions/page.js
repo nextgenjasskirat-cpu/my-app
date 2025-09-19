@@ -67,7 +67,7 @@ export default function AdmissionForm() {
   };
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = "9781278770";
+    const phoneNumber = "+61402417462";
     const message = `Hello, I'm interested in enrolling at NextGen Truck Driving School. I just submitted my application. My name is ${formData.name}.`;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');

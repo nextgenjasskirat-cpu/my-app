@@ -50,7 +50,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative w-full h-50 md:h-[850px] overflow-hidden rounded-lg">
+    <div className="relative w-full h-70 pt-8 md:h-[850px] md:pt-8 overflow-hidden rounded-lg">
       {/* Slides container */}
       <div 
         className="flex transition-transform duration-700 ease-in-out h-full"

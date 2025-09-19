@@ -37,8 +37,8 @@ export default function Navbar() {
   }, []);
 
   const phoneNumbers = [
-    { label: 'Official Contact', number: '+91 97812-78770' },
-    { label: 'Emergency', number: '+91 97812-78770' }
+    { label: 'Official Contact', number: '+61 4024 17462' },
+    { label: 'Emergency', number: '+61 4024 17462' }
   ];
 
   const navLinks = [
@@ -67,7 +67,7 @@ export default function Navbar() {
     },
     { 
       icon: <FaWhatsapp className="h-5 w-5" />, 
-      href: 'https://wa.me/9781278770?text=Hi%2C%20I%20am%20interested%20in%20your%20services%20at%20Colour%20Sense%20Salon.%20Could%20you%20please%20help%20me%20with%20more%20details%3F',
+      href: 'https://wa.me/+61402417462?text=Hi%2C%20I%20am%20interested%20in%20your%20services%20at%20Colour%20Sense%20Salon.%20Could%20you%20please%20help%20me%20with%20more%20details%3F',
       name: 'WhatsApp',
       color: "hover:text-white hover:bg-[#25D366]",
       bg: "bg-[#25D366]"
