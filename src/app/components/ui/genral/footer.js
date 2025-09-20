@@ -70,22 +70,7 @@ const Footer = () => {
               <p className="text-gray-400 text-center md:text-left mb-6 leading-relaxed">
                 Your premier truck driving school with over 15 years of experience training professional drivers.
               </p>
-              <div className="flex space-x-3">
-                {[
-                  { icon: FaFacebook, color: 'text-white bg-gray-800 hover:bg-yellow-600' },
-                  { icon: FaTwitter, color: 'text-white bg-gray-800 hover:bg-yellow-600' },
-                  { icon: FaInstagram, color: 'text-white bg-gray-800 hover:bg-yellow-600' },
-                  { icon: FaLinkedin, color: 'text-white bg-gray-800 hover:bg-yellow-600' }
-                ].map((social, index) => (
-                  <a 
-                    key={index}
-                    href="#" 
-                    className={`w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 transform hover:-translate-y-1 ${social.color} shadow-sm hover:shadow-md`}
-                  >
-                    <social.icon className="text-lg" />
-                  </a>
-                ))}
-              </div>
+
             </div>
 
             {/* Quick Links */}
@@ -149,9 +134,9 @@ const Footer = () => {
               </h3>
               <ul className="space-y-5">
                 {[
-                  { icon: FaMapMarkerAlt, text: '123 Trucker Lane, Highway City, TC 12345' },
-                  { icon: FaPhone, text: '(555) 123-4567' },
-                  { icon: FaEnvelope, text: 'info@drivesafeschool.com' }
+                  { icon: FaMapMarkerAlt, text: '20 MANTAKA ST BLACKTOWN 2148 NSW AUSTRALIA' },
+                  { icon: FaPhone, text: '+61 402 417 462' },
+                  { icon: FaEnvelope, text: '13jassptyltd@gmail.com' }
                 ].map((contact, index) => (
                   <li 
                     key={index} 

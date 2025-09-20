@@ -240,21 +240,21 @@ export default function AboutUsPage() {
                       <FaMapMarkerAlt className="text-yellow-500 mr-4 text-xl" />
                       <div>
                         <p className="font-semibold">Address</p>
-                        <p className="text-gray-400">1234 Trucking Avenue, Phoenix, AZ 85001</p>
+                        <p className="text-gray-400">20 MANTAKA ST BLACKTOWN 2148 NSW AUSTRALIA</p>
                       </div>
                     </div>
                     <div className="flex items-center">
                       <FaPhone className="text-yellow-500 mr-4 text-xl" />
                       <div>
                         <p className="font-semibold">Phone</p>
-                        <p className="text-gray-400">(978) 127-8770</p>
+                        <p className="text-gray-400">+61 402 417 462</p>
                       </div>
                     </div>
                     <div className="flex items-center">
                       <FaEnvelope className="text-yellow-500 mr-4 text-xl" />
                       <div>
                         <p className="font-semibold">Email</p>
-                        <p className="text-gray-400">info@nextgentrucking.edu</p>
+                        <p className="text-gray-400">13jassptyltd@gmail.com</p>
                       </div>
                     </div>
                     <div className="flex items-center">
@@ -306,16 +306,34 @@ export default function AboutUsPage() {
                     </div>
                   ) : (
                     <div className="h-full relative">
-                      {/* This would be replaced with an actual map component like Google Maps */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black opacity-80"></div>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center p-8">
-                          <FaMapMarkerAlt className="text-yellow-500 text-5xl mx-auto mb-4" />
-                          <h3 className="text-2xl font-bold mb-2">NextGen Training Facility</h3>
-                          <p className="text-gray-300 mb-4">1234 Trucking Avenue, Phoenix, AZ 85001</p>
-                          <button className="px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-medium rounded-lg transition-all">
-                            Get Directions
-                          </button>
+                      {/* Google Maps Embed */}
+                      <iframe
+                        src="https://maps.google.com/maps?q=20+Mantaka+St,+Blacktown+NSW+2148,+Australia&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen=""
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="rounded-xl"
+                      ></iframe>
+                      
+                      {/* Overlay with facility info and directions button */}
+                      <div className="absolute top-4 left-4 bg-black bg-opacity-80 backdrop-blur-sm rounded-lg p-4 max-w-xs">
+                        <div className="flex items-start">
+                          <FaMapMarkerAlt className="text-yellow-500 text-xl mr-3 mt-1 flex-shrink-0" />
+                          <div>
+                            <h3 className="text-lg font-bold text-white mb-1">NextGen Training Facility</h3>
+                            <p className="text-gray-300 text-sm mb-3">20 MANTAKA ST BLACKTOWN 2148 NSW AUSTRALIA</p>
+                            <a 
+                              href="https://maps.app.goo.gl/7ZxwZanyv2h9nCGQ8" 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="inline-block px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-medium rounded-lg transition-all transform hover:scale-105 text-sm"
+                            >
+                              Get Directions
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>

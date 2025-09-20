@@ -289,12 +289,12 @@ export default function SchedulePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                 <div className="bg-black p-6 rounded-lg">
                   <h3 className="text-xl font-semibold mb-4 text-yellow-500">Phone</h3>
-                  <p className="text-lg">(978) 127-8770</p>
+                  <p className="text-lg">+61 402 417 462</p>
                   <p className="text-gray-400 mt-2">Mon-Fri, 8:00 AM - 6:00 PM</p>
                 </div>
                 <div className="bg-black p-6 rounded-lg">
                   <h3 className="text-xl font-semibold mb-4 text-yellow-500">Email</h3>
-                  <p className="text-lg">admissions@nextgentrucking.edu</p>
+                  <p className="text-lg">13jassptyltd@gmail.com</p>
                   <p className="text-gray-400 mt-2">We respond within 24 hours</p>
                 </div>
               </div>

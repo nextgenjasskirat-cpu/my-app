@@ -60,7 +60,7 @@ export default function Navbar() {
   const socialLinks = [
     { 
       icon: <FaInstagram className="h-5 w-5" />, 
-      href: 'https://www.instagram.com/hii.mahii/', 
+      href: 'https://www.instagram.com/nextgen_truckdrivingschool/', 
       name: 'Instagram',
       color: "hover:text-white hover:bg-[#E1306C]",
       bg: "bg-[#E1306C]"

@@ -191,6 +191,17 @@ export default function Home() {
             box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
           }
         }
+        .section-divider {
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+          margin: 4rem 0;
+        }
+        .hex-pattern {
+          background-image: 
+            radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.05) 2%, transparent 20%),
+            radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.05) 2%, transparent 20%);
+          background-size: 30px 30px;
+        }
       `}</style>
 
       {/* Hero Section with Carousel */}
@@ -199,7 +210,7 @@ export default function Home() {
       </section>
 
       {/* Welcome/About Section */}
-      <section className="py-20 bg-darker relative overflow-hidden">
+      <section className="py-20 bg-darker relative overflow-hidden hex-pattern">
         <div className="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -213,7 +224,7 @@ export default function Home() {
               <div className="gold-border rounded-xl overflow-hidden shine-effect">
                 <img
                   src="https://res.cloudinary.com/dsyf8cltg/image/upload/v1757875404/gallery/ns0pawerpygyra2pnfpc.jpg"
-                  className="rounded-xl w-full max-w-4xl object-cover transition-transform duration-700 hover:scale-110"
+                  className="rounded-xl w-full max-w-4xl object-cover transition-transform duration-700 hover:scale-105"
                   alt="Truck driving school"
                 />
               </div>
@@ -229,10 +240,13 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section ref={statsRef} className="py-20 bg-dark relative overflow-hidden flex ">
+      <section ref={statsRef} className="py-20 bg-dark relative overflow-hidden hex-pattern">
         <div className="absolute inset-0 gold-gradient opacity-10"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
+          <h2 className="text-3xl font-bold text-white mb-16 text-center md:text-4xl gold-gradient-text">
+            Our Success in Numbers
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border">
               <div className="text-5xl font-bold mb-2 text-gold">{statsInView ? `${statValues.passRate}%` : '0%'}</div>
               <div className="text-gray-300 uppercase tracking-wider text-sm font-semibold">Pass Rate</div>
@@ -241,6 +255,11 @@ export default function Home() {
             <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border" style={{transitionDelay: '0.1s'}}>
               <div className="text-5xl font-bold mb-2 text-gold">{statsInView ? `${statValues.graduates}+` : '0+'}</div>
               <div className="text-gray-300 uppercase tracking-wider text-sm font-semibold">Graduates</div>
+            </div>
+            
+            <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border" style={{transitionDelay: '0.2s'}}>
+              <div className="text-5xl font-bold mb-2 text-gold">{statsInView ? `${statValues.jobPlacement}%` : '0%'}</div>
+              <div className="text-gray-300 uppercase tracking-wider text-sm font-semibold">Job Placement</div>
             </div>
            
             <div className="p-6 bg-darker rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105 gold-border" style={{transitionDelay: '0.3s'}}>
@@ -251,8 +270,10 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="section-divider"></div>
+
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-black relative">
+      <section className="py-20 bg-black relative hex-pattern">
         <div className="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
         <div className="container mx-auto px-4">
           <div>
@@ -298,8 +319,10 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="section-divider"></div>
+
       {/* Programs Section */}
-      <section className="py-20 bg-dark relative">
+      <section className="py-20 bg-dark relative hex-pattern">
         <div className="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
         <div className="container mx-auto px-4">
           <div>
@@ -357,8 +380,10 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="section-divider"></div>
+
       {/* New Features Section */}
-      <section className="py-20 bg-black relative">
+      <section className="py-20 bg-black relative hex-pattern">
         <div className="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-white mb-16 text-center md:text-4xl gold-gradient-text">
@@ -407,6 +432,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <div className="section-divider"></div>
 
       {/* Review */}
       <ReviewComponent/>
