@@ -24,7 +24,7 @@ export default function Home() {
           const duration = 2000;
           const steps = 100;
           const incrementPass = 98 / steps;
-          const incrementGrad = 2000 / steps;
+          const incrementGrad = 200 / steps;
           const incrementJob = 95 / steps;
           const incrementExp = 15 / steps;
           
@@ -218,7 +218,7 @@ export default function Home() {
               Welcome to NextGen Truck Driving School
             </h2>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
-              At Elite Truck Driving School, we provide top-tier training for aspiring truck drivers. Our comprehensive programs are designed to equip you with the skills needed for a successful career in the trucking industry. With experienced instructors and state-of-the-art facilities, we're committed to your success on the road.
+              At Next Gen Truck Driving School we provide top-tier training for aspiring truck drivers. Our comprehensive programs are designed to equip you with the skills needed for a successful career in the trucking industry. With experienced instructors and state-of-the-art facilities, we're committed to your success on the road.
             </p>
             <div className="flex justify-center mb-12">
               <div className="gold-border rounded-xl overflow-hidden shine-effect">
@@ -278,7 +278,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div>
             <h2 className="text-3xl font-bold text-white mb-16 text-center md:text-4xl gold-gradient-text">
-              Why Choose Elite Truck Driving School?
+              Why Choose Next Gen Truck Driving School
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               <div className="bg-darker p-8 rounded-2xl shadow-2xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 gold-border group">

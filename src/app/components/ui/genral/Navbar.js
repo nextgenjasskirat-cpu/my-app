@@ -67,7 +67,7 @@ export default function Navbar() {
     },
     { 
       icon: <FaWhatsapp className="h-5 w-5" />, 
-      href: 'https://wa.me/+61402417462?text=Hi%2C%20I%20am%20interested%20in%20your%20services%20at%20Colour%20Sense%20Salon.%20Could%20you%20please%20help%20me%20with%20more%20details%3F',
+      href: 'https://wa.me/+61402417462?text=Hi%2C%20I%20am%20interested%20in%20your%20services%20at%20Next%20Gen%20Truck%20Driving%20School.%20Could%20you%20please%20help%20me%20with%20more%20details%3F',
       name: 'WhatsApp',
       color: "hover:text-white hover:bg-[#25D366]",
       bg: "bg-[#25D366]"
@@ -609,8 +609,8 @@ export default function Navbar() {
           whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
         >
-          <IoIosCall className="h-8 w-8 bg-blue-800 rounded-2xl p-1" ></IoIosCall>
-          <span className="text-xs mt-1">Call</span>
+          <IoIosCall className="h-8 w-8 ml-3 bg-blue-800 rounded-2xl p-1" ></IoIosCall>
+          <span className="text-xs mt-1 ml-3">Call</span>
         </motion.a>
         
         {/* Social icons */}
@@ -620,7 +620,7 @@ export default function Navbar() {
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center p-2 rounded-lg transition-colors duration-200 text-gray-200 hover:text-yellow-400"
+            className="flex flex-col items-center  rounded-lg transition-colors duration-200 text-gray-200 hover:text-yellow-400"
             whileHover={{ scale: 1.1, y: -2 }}
             whileTap={{ scale: 0.9 }}
           >

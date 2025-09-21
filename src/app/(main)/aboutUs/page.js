@@ -77,7 +77,7 @@ export default function AboutUsPage() {
           <div className="relative container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
-                About <span className="text-yellow-500">NextGen</span>
+                About <span className="text-yellow-500">Next Gen Truck Driving School</span>
               </h1>
               <p className="text-xl mb-8 animate-fade-in-up">
                 Training the next generation of professional truck drivers since 2008
@@ -132,7 +132,7 @@ export default function AboutUsPage() {
               </div>
               <div className="md:w-1/2 md:pl-12 animate-fade-in-up">
                 <div className="bg-gray-900 rounded-xl p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20">
-                  <h3 className="text-2xl font-bold mb-6 text-yellow-500">Why Choose NextGen?</h3>
+                  <h3 className="text-2xl font-bold mb-6 text-yellow-500">Why Choose Next Gen Truck Driving School ?</h3>
                   <div className="space-y-4">
                     <div className="flex items-center">
                       <div className="bg-yellow-500 w-2 h-8 rounded-full mr-4"></div>
@@ -323,7 +323,7 @@ export default function AboutUsPage() {
                         <div className="flex items-start">
                           <FaMapMarkerAlt className="text-yellow-500 text-xl mr-3 mt-1 flex-shrink-0" />
                           <div>
-                            <h3 className="text-lg font-bold text-white mb-1">NextGen Training Facility</h3>
+                            <h3 className="text-lg font-bold text-white mb-1">NextGen Truck Driving School Training Facility</h3>
                             <p className="text-gray-300 text-sm mb-3">20 MANTAKA ST BLACKTOWN 2148 NSW AUSTRALIA</p>
                             <a 
                               href="https://maps.app.goo.gl/7ZxwZanyv2h9nCGQ8" 
