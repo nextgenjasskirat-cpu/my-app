@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ChevronDownIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp, FaFacebook } from "react-icons/fa";
 import { IoIosCall } from "react-icons/io";
 
 export default function Navbar() {
@@ -52,7 +52,6 @@ export default function Navbar() {
       href: '#', 
       dropdown: [
         { name: 'FAQs', href: '/FAQs' },
-        { name: 'Blogs', href: '/blog' }
       ] 
     },
   ];
@@ -71,6 +70,13 @@ export default function Navbar() {
       name: 'WhatsApp',
       color: "hover:text-white hover:bg-[#25D366]",
       bg: "bg-[#25D366]"
+    },
+    { 
+      icon: <FaFacebook className="h-5 w-5" />, 
+      href: 'https://www.facebook.com/share/19iAnmvJHw/', 
+      name: 'Facebook',
+      color: "hover:text-white hover:bg-[#1877F2]",
+      bg: "bg-[#1877F2]"
     }
   ];
 
