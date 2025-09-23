@@ -85,7 +85,7 @@ export default function AdmissionForm() {
         <meta property="og:type" content="website" />
       </Head>
 
-      <div className="min-h-screen bg-black text-gray-200">
+      <div className="min-h-screen bg-black pb-22 text-gray-200">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden bg-gradient-to-br from-black to-black">
           <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
