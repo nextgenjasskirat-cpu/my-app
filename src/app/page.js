@@ -68,52 +68,127 @@ export default function Home() {
   // Program tabs animation
   const programs = [
     {
-      title: "CDL Class A",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      ),
-      description: "Comprehensive training for operating tractor-trailers. Includes classroom, range, and road training.",
+      title: "LR Licence (Light Rigid)",
+      icon: "LR",
+      description: "Get your Light Rigid (LR) licence to operate medium-sized vehicles up to 8 tonnes GVM. Perfect for small trucks, mini-buses, and light rigid vehicles used in various industries.",
+      requirements: [
+        "Hold current car licence for 12+ months",
+        "Medical fitness certificate",
+        "Minimum age: 18 years",
+        "Pass knowledge test",
+        "Complete practical training"
+      ],
       details: [
-        "160 hours of instruction",
-        "Pre-trip inspection",
-        "Backing maneuvers",
-        "Highway driving"
+        "Vehicle up to 8 tonnes GVM",
+        "Mini-buses up to 12 seats",
+        "Basic vehicle maintenance",
+        "Urban driving techniques",
+        "Load capacity calculations",
+        "Safety inspection procedures"
       ]
     },
     {
-      title: "CDL Class B",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-        </svg>
-      ),
-      description: "Focused on straight trucks and buses. Ideal for local delivery or passenger transport.",
+      title: "Medium Rigid (MR) Truck Licence",
+      icon: "MR",
+      description: "Advance your career with a Medium Rigid (MR) truck licence. Operate rigid vehicles with 2 axles and over 8 tonnes GVM, essential for local delivery and transport roles.",
+      requirements: [
+        "Hold car licence for 2+ years",
+        "Medical fitness assessment",
+        "Clean driving record",
+        "Minimum age: 18 years",
+        "LR licence recommended"
+      ],
       details: [
-        "120 hours of training",
-        "Vehicle maintenance",
-        "Safety protocols",
-        "Urban navigation"
+        "Vehicles 2 axles, 8+ tonnes GVM",
+        "Advanced braking systems",
+        "Load distribution principles",
+        "Route planning skills",
+        "Fuel efficiency techniques",
+        "Industry compliance standards"
       ]
     },
     {
-      title: "Refresher Courses",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-        </svg>
-      ),
-      description: "Update your skills or prepare for endorsements like hazmat or doubles/triples.",
+      title: "HR Licence NSW Training & Assessment",
+      icon: "HR",
+      description: "Heavy Rigid (HR) licence training for operating rigid vehicles with 3 or more axles. Essential for heavy transport, waste management, and construction industries.",
+      requirements: [
+        "Hold MR licence for 1+ year",
+        "Advanced medical clearance",
+        "Minimum age: 20 years",
+        "Driving history check",
+        "Pre-course assessment"
+      ],
       details: [
-        "Customized duration",
-        "Endorsement prep",
-        "Defensive driving",
-        "Logbook management"
+        "Vehicles 3+ axles",
+        "Multi-axle vehicle control",
+        "Heavy load operations",
+        "Night driving skills",
+        "Emergency procedures",
+        "Advanced road safety"
+      ]
+    },
+    {
+      title: "HC Licence Heavy Combination",
+      icon: "HC",
+      description: "Heavy Combination (HC) truck licence for operating prime movers with semi-trailers. The next step for professional truck drivers in long-haul transport.",
+      requirements: [
+        "Hold HR licence for 1+ year",
+        "Comprehensive medical exam",
+        "Minimum age: 21 years",
+        "Proven driving experience",
+        "Industry reference check"
+      ],
+      details: [
+        "Prime mover + semi-trailer",
+        "Articulated vehicle dynamics",
+        "Long-distance operations",
+        "Advanced coupling procedures",
+        "Fatigue management",
+        "National compliance"
+      ]
+    },
+    {
+      title: "Multi Combination (MC) Truck Licence",
+      icon: "MC",
+      description: "The highest level of heavy vehicle licensing - Multi Combination (MC) for operating B-doubles and road trains. For elite professional drivers in the transport industry.",
+      requirements: [
+        "Hold HC licence for 1+ year",
+        "Extensive driving experience",
+        "Advanced medical assessment",
+        "Minimum age: 23 years",
+        "Industry endorsement"
+      ],
+      details: [
+        "B-double operations",
+        "Road train configurations",
+        "Advanced load restraint",
+        "Remote area driving",
+        "Multiple trailer dynamics",
+        "National heavy vehicle law"
+      ]
+    },
+    {
+      title: "Bus Driver Authority Licence" ,
+      icon: "BD",
+      description: "Specialized Bus Driver Authority training for passenger transport services. Learn to safely operate buses while providing excellent customer service.",
+      requirements: [
+        "Hold relevant vehicle class licence",
+        "Working with children check",
+        "National police certificate",
+        "Medical fitness certificate",
+        "Public transport authority application"
+      ],
+      details: [
+        "Passenger safety management",
+        "Route service operations",
+        "Customer service excellence",
+        "Accessibility requirements",
+        "Incident response procedures",
+        "Fare collection systems"
       ]
     }
   ];
-
+  
   return (
     <div className="min-h-screen bg-black font-sans overflow-hidden">
       <style jsx>{`
@@ -339,7 +414,7 @@ export default function Home() {
               Welcome to NextGen Truck Driving School
             </h2>
             <p className="text-lg max-w-3xl mx-auto mb-10 leading-relaxed mobile-optimized-text text-secondary-contrast">
-              At Next Gen Truck Driving School we provide top-tier training for aspiring truck drivers. Our comprehensive programs are designed to equip you with the skills needed for a successful career in the trucking industry. With experienced instructors and state-of-the-art facilities, we're committed to your success on the road.
+              At NextGen Truck Driving School we provide top-tier training for aspiring truck drivers. Our comprehensive programs are designed to equip you with the skills needed for a successful career in the trucking industry. With experienced instructors and state-of-the-art facilities, we're committed to your success on the road.
             </p>
             <div className="flex justify-center mb-12">
               <div className="gold-border rounded-xl overflow-hidden float-slow">
@@ -399,7 +474,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div>
             <h2 className="text-4xl font-bold mb-16 text-center md:text-4xl gold-gradient-text text-shimmer  ">
-              Why Choose Next Gen Truck Driving School
+              Why Choose NextGen Truck Driving School
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               <div className="bg-darker p-8 rounded-2xl shadow-2xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 gold-border group float-slow">
@@ -419,7 +494,7 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-4 text-center group-hover:text-gold transition-colors ">Modern Fleet</h3>
+                <h3 className="text-xl font-semibold mb-4 text-center group-hover:text-gold transition-colors ">Modern Equipments</h3>
                 <p className="text-center mobile-optimized-text ">
                   Train on the latest trucks and equipment, including simulators for safe, effective learning.
                 </p>
@@ -442,65 +517,71 @@ export default function Home() {
 
       
 
-      {/* Programs Section */}
-      <section className="py-20 bg-dark relative hex-pattern">
+ {/* Programs Section */}
+ <section className="py-20 bg-dark relative hex-pattern">
         <div className="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
         <div className="container mx-auto px-4">
           <div>
-            <h2 className="text-4xl font-bold mb-16 text-center md:text-4xl gold-gradient-text text-shimmer  ">
-              Our Training Programs
+            <h2 className="text-4xl font-bold mb-16 text-center md:text-4xl gold-gradient-text text-shimmer">
+              Our Heavy Vehicle Licence Programs
             </h2>
             
             {/* Program Tabs */}
             <div className="flex justify-center mb-12">
-              <div className="flex flex-wrap justify-center gap-4 bg-darker p-2 rounded-xl gold-border">
+              <div className="flex flex-wrap justify-center gap-2 bg-darker p-2 rounded-xl gold-border max-w-6xl">
                 {programs.map((program, index) => (
                   <button
                     key={index}
                     onClick={() => setActiveProgram(index)}
-                    className={`px-8 py-4 rounded-xl font-bold transition-all duration-300 ${
+                    className={`px-4 py-3 rounded-lg font-bold transition-all duration-300 text-sm md:text-base ${
                       activeProgram === index 
-                        ? 'gold-gradient text-black shadow-2xl glow-gold' 
+                        ? 'gold-gradient text-black shadow-xl glow-gold' 
                         : 'bg-black text-gray-300 hover:text-gold hover:bg-darker'
                     }`}
                   >
-                    {program.title}
+                    {program.title.split(' ')[0]} {/* Shows just LR, MR, HR, etc */}
                   </button>
                 ))}
               </div>
             </div>
             
             {/* Program Content */}
-            <div className="bg-darker p-10 rounded-3xl shadow-2xl transition-all duration-500 gold-border program-transition">
-              <div className="flex flex-col md:flex-row items-center gap-12">
-                <div className="w-full md:w-2/5 flex justify-center">
-                  <div className="bg-black rounded-2xl p-10 w-80 h-80 flex items-center justify-center transform transition-all duration-500 hover:scale-105 gold-border float-slow">
-                    {programs[activeProgram].icon}
+            <div className="bg-darker p-8 rounded-3xl shadow-2xl transition-all duration-500 gold-border program-transition">
+              <div className="flex flex-col lg:flex-row items-center gap-8">
+                <div className="w-full lg:w-2/5 flex justify-center">
+                  <div className="bg-black rounded-2xl p-8 w-72 h-72 flex items-center justify-center transform transition-all duration-500 hover:scale-105 gold-border float-slow">
+                    <span className="text-5xl">{programs[activeProgram].icon}</span>
                   </div>
                 </div>
-                <div className="w-full md:w-3/5 fade-in-up">
-                  <h3 className="text-3xl font-semibold mb-6 gold-gradient-text ">{programs[activeProgram].title}</h3>
-                  <p className="mb-8 text-lg leading-relaxed mobile-optimized-text card-text-contrast">{programs[activeProgram].description}</p>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                    {programs[activeProgram].details.map((detail, i) => (
-                      <li key={i} className="flex items-center mobile-optimized-text card-text-contrast">
-                        <svg className="w-6 h-6 text-gold mr-4 flex-shrink-0 bounce-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                  <button className="gold-gradient text-black px-10 py-4 rounded-xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg gold-border pulse-gold">
-                    Learn More
-                  </button>
+                <div className="w-full lg:w-3/5 fade-in-up">
+                  <h3 className="text-2xl md:text-3xl font-semibold mb-4 gold-gradient-text">{programs[activeProgram].title}</h3>
+                  <p className="mb-6 text-base md:text-lg leading-relaxed mobile-optimized-text card-text-contrast">{programs[activeProgram].description}</p>
+                  
+                  {/* Course Requirements & Details */}
+                 
+
+                  {/* Course Features */}
+                  <div className="mb-8">
+                    <h4 className="text-lg md:text-xl font-semibold mb-3 text-gold">Training Coverage:</h4>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {programs[activeProgram].details.map((detail, i) => (
+                        <li key={i} className="flex items-start mobile-optimized-text card-text-contrast">
+                          <svg className="w-4 h-4 text-gold mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                          </svg>
+                          <span>{detail}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
      
 
       {/* New Features Section */}

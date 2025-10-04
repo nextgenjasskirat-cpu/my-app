@@ -6,24 +6,26 @@ import { IoClose } from 'react-icons/io5';
 
 export default function AdmissionForm() {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
-    address: '',
-    experience: 'none',
-    licenseType: 'class-c',
-    message: '',
-    agreeToTerms: false
+    currentLicenceNumber: '',
+    licenceCardNumber: '',
+    rmsLogBookNumber: '',
+    licenceCourseRequired: 'LR',
+    preferredDate: '',
+    message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
   const [showWhatsAppPopup, setShowWhatsAppPopup] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: value
     }));
   };
 
@@ -47,14 +49,16 @@ export default function AdmissionForm() {
         setSubmitMessage('Application submitted successfully! We will contact you soon.');
         setShowWhatsAppPopup(true);
         setFormData({
-          name: '',
+          firstName: '',
+          lastName: '',
           email: '',
           phone: '',
-          address: '',
-          experience: 'none',
-          licenseType: 'class-c',
-          message: '',
-          agreeToTerms: false
+          currentLicenceNumber: '',
+          licenceCardNumber: '',
+          rmsLogBookNumber: '',
+          licenceCourseRequired: 'LR',
+          preferredDate: '',
+          message: ''
         });
       } else {
         setSubmitMessage(data.error || 'An error occurred. Please try again.');
@@ -68,7 +72,7 @@ export default function AdmissionForm() {
 
   const handleWhatsAppClick = () => {
     const phoneNumber = "+61402417462";
-    const message = `Hello, I'm interested in enrolling at NextGen Truck Driving School. I just submitted my application. My name is ${formData.name}.`;
+    const message = `Hello, I'm interested in enrolling at NextGen Truck Driving School. I just submitted my application. My name is ${formData.firstName} ${formData.lastName}.`;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
     setShowWhatsAppPopup(false);
@@ -112,7 +116,7 @@ export default function AdmissionForm() {
                 <div className="text-yellow-500 text-3xl mb-4 flex justify-center">
                   <FaTruck />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-center">Modern Fleet</h3>
+                <h3 className="text-xl font-semibold mb-2 text-center">Modern Equipments</h3>
                 <p className="text-gray-300 text-center">Train on state-of-the-art trucks with the latest technology and safety features.</p>
               </div>
               <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 transform transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/10">
@@ -147,22 +151,37 @@ export default function AdmissionForm() {
                   </div>
                 )}
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block mb-2 font-medium">Full Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
-                      placeholder="Enter your full name"
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="firstName" className="block mb-2 font-medium">First Name *</label>
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
+                        placeholder="First"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="lastName" className="block mb-2 font-medium">Last Name *</label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
+                        placeholder="Last"
+                      />
+                    </div>
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block mb-2 font-medium">Email Address</label>
+                    <label htmlFor="email" className="block mb-2 font-medium">Email *</label>
                     <input
                       type="email"
                       id="email"
@@ -171,72 +190,100 @@ export default function AdmissionForm() {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
-                      placeholder="Enter your email address"
+                      placeholder="Email*"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block mb-2 font-medium">Phone Number</label>
+                    <label htmlFor="phone" className="block mb-2 font-medium">Phone *</label>
+                    <div className="flex">
+                      <div className="flex items-center px-4 py-3 bg-gray-700 border border-r-0 border-gray-600 rounded-l-lg text-gray-400">
+                        India +91
+                      </div>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                        className="flex-1 px-4 py-3 bg-gray-700 border border-gray-600 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
+                        placeholder="Phone*"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="currentLicenceNumber" className="block mb-2 font-medium">Current Licence Number</label>
                     <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
+                      type="text"
+                      id="currentLicenceNumber"
+                      name="currentLicenceNumber"
+                      value={formData.currentLicenceNumber}
                       onChange={handleChange}
-                      required
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
-                      placeholder="Enter your phone number"
+                      placeholder="Current Licence Number"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="address" className="block mb-2 font-medium">Address</label>
-                    <textarea
-                      id="address"
-                      name="address"
-                      value={formData.address}
+                    <label htmlFor="licenceCardNumber" className="block mb-2 font-medium">Licence Card Number</label>
+                    <input
+                      type="text"
+                      id="licenceCardNumber"
+                      name="licenceCardNumber"
+                      value={formData.licenceCardNumber}
                       onChange={handleChange}
-                      required
-                      rows="3"
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
-                      placeholder="Enter your full address"
-                    ></textarea>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="experience" className="block mb-2 font-medium">Driving Experience</label>
-                      <select
-                        id="experience"
-                        name="experience"
-                        value={formData.experience}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
-                      >
-                        <option value="none">No experience</option>
-                        <option value="some">Some experience</option>
-                        <option value="experienced">Experienced driver</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="licenseType" className="block mb-2 font-medium">Desired License Type</label>
-                      <select
-                        id="licenseType"
-                        name="licenseType"
-                        value={formData.licenseType}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
-                      >
-                        <option value="class-c">Class C</option>
-                        <option value="class-b">Class B</option>
-                        <option value="class-a">Class A</option>
-                      </select>
-                    </div>
+                      placeholder="Licence Card Number"
+                    />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block mb-2 font-medium">Additional Information</label>
+                    <label htmlFor="rmsLogBookNumber" className="block mb-2 font-medium">RMS Log Book Number</label>
+                    <input
+                      type="text"
+                      id="rmsLogBookNumber"
+                      name="rmsLogBookNumber"
+                      value={formData.rmsLogBookNumber}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
+                      placeholder="RMS Log Book Number"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="licenceCourseRequired" className="block mb-2 font-medium">Licence Course Required</label>
+                    <select
+                      id="licenceCourseRequired"
+                      name="licenceCourseRequired"
+                      value={formData.licenceCourseRequired}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
+                    >
+                      <option value="LR">LR</option>
+                      <option value="MR">MR</option>
+                      <option value="MC">MC</option>
+                      <option value="HC">HC</option>
+                      <option value="Bus">Bus</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="preferredDate" className="block mb-2 font-medium">Preferred Date</label>
+                    <input
+                      type="date"
+                      id="preferredDate"
+                      name="preferredDate"
+                      value={formData.preferredDate}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block mb-2 font-medium">Comment or Message</label>
                     <textarea
                       id="message"
                       name="message"
@@ -244,25 +291,8 @@ export default function AdmissionForm() {
                       onChange={handleChange}
                       rows="4"
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all placeholder-gray-400"
-                      placeholder="Tell us about your career goals or any questions you may have"
+                      placeholder="Comment or Message"
                     ></textarea>
-                  </div>
-
-                  <div className="flex items-start">
-                    <div className="flex items-center h-5">
-                      <input
-                        id="agreeToTerms"
-                        name="agreeToTerms"
-                        type="checkbox"
-                        checked={formData.agreeToTerms}
-                        onChange={handleChange}
-                        required
-                        className="w-4 h-4 bg-gray-700 border border-gray-600 rounded focus:ring-3 focus:ring-yellow-500"
-                      />
-                    </div>
-                    <label htmlFor="agreeToTerms" className="ml-3 text-sm text-gray-300">
-                      I agree to the processing of my personal data according to the Privacy Policy
-                    </label>
                   </div>
 
                   <button
