@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 
 export default function ReviewComponent() {
@@ -12,6 +12,11 @@ export default function ReviewComponent() {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState('');
   const [confirmationType, setConfirmationType] = useState('success');
+  const [activeVideo, setActiveVideo] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [videoProgress, setVideoProgress] = useState([0, 0, 0]);
+  const videoRefs = [useRef(null), useRef(null), useRef(null)];
+  
   const [formData, setFormData] = useState({
     name: '',
     review: '',
@@ -19,9 +24,70 @@ export default function ReviewComponent() {
   });
 
   const reviewsPerPage = 6;
+  
+  // Video data - replace with your actual video files in public folder
+  const videos = [
+    { 
+      src: '/videoMan.mp4', 
+      title: 'Product Demo', 
+      description: 'See how it works in action',
+      duration: '2:30'
+    },
+    { 
+      src: '/videoGirl2.mp4', 
+      title: 'Customer Stories', 
+      description: 'Real user experiences',
+      duration: '1:45'
+    },
+    { 
+      src: '/videoGirl1.mp4', 
+      title: 'Features Overview', 
+      description: 'All key features explained',
+      duration: '3:15'
+    }
+  ];
 
   useEffect(() => {
     fetchReviews();
+  }, []);
+
+  // Ensure video elements are preloaded and ready on initial render
+  useEffect(() => {
+    const detachHandlers = [];
+
+    videoRefs.forEach((ref) => {
+      if (!ref.current) return;
+
+      const videoEl = ref.current;
+      try {
+        videoEl.muted = true;
+        // Capture first frame as poster when available
+        const handleLoadedData = () => {
+          if (!videoEl.videoWidth || !videoEl.videoHeight) return;
+          const canvas = document.createElement('canvas');
+          canvas.width = videoEl.videoWidth;
+          canvas.height = videoEl.videoHeight;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+          ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height);
+          try {
+            const dataUrl = canvas.toDataURL('image/jpeg');
+            // Setting poster after data is loaded ensures we show the first frame
+            videoEl.setAttribute('poster', dataUrl);
+          } catch {}
+        };
+
+        videoEl.addEventListener('loadeddata', handleLoadedData, { once: true });
+        detachHandlers.push(() => videoEl.removeEventListener('loadeddata', handleLoadedData));
+
+        // Trigger the browser to fetch metadata/first frames
+        videoEl.load();
+      } catch {}
+    });
+
+    return () => {
+      detachHandlers.forEach((fn) => fn());
+    };
   }, []);
 
   useEffect(() => {
@@ -94,6 +160,51 @@ export default function ReviewComponent() {
 
   const handleLoadMore = () => {
     setCurrentPage(prev => prev + 1);
+  };
+
+  const handleVideoPlay = (index) => {
+    // Pause all other videos
+    videoRefs.forEach((ref, i) => {
+      if (ref.current && i !== index) {
+        ref.current.pause();
+      }
+    });
+    
+    setActiveVideo(index);
+    setIsPlaying(true);
+  };
+
+  const handleVideoPause = (index) => {
+    if (activeVideo === index) {
+      setIsPlaying(false);
+    }
+  };
+
+  const handleVideoEnd = (index) => {
+    if (activeVideo === index) {
+      setIsPlaying(false);
+    }
+  };
+
+  const handleVideoTimeUpdate = (index, e) => {
+    const video = e.target;
+    const progress = (video.currentTime / video.duration) * 100;
+    const newProgress = [...videoProgress];
+    newProgress[index] = progress;
+    setVideoProgress(newProgress);
+  };
+
+  const togglePlayPause = (index) => {
+    const video = videoRefs[index].current;
+    if (!video) return;
+
+    if (video.paused) {
+      video.play();
+      handleVideoPlay(index);
+    } else {
+      video.pause();
+      handleVideoPause(index);
+    }
   };
 
   const hasMoreReviews = displayedReviews.length < reviews.length;
@@ -188,34 +299,125 @@ export default function ReviewComponent() {
     );
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-black">
-        <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-yellow-500 mb-4"></div>
-          <p className="text-gray-400">Loading reviews...</p>
-        </div>
-      </div>
-    );
-  }
+  // Do not block initial UI; show a small banner instead of replacing the whole page
 
   return (
     <div className="min-h-screen bg-black py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <Head>
-        <title>Customer Reviews</title>
-        <meta name="description" content="Share your experience with us" />
+        <title>Customer Reviews & Demos</title>
+        <meta name="description" content="Share your experience and watch our product demos" />
       </Head>
 
       <ConfirmationPopup />
 
-      <div className="max-w-6xl mx-auto">
+      {isLoading && (
+        <div className="mb-6 flex items-center justify-center">
+          <div className="flex items-center space-x-3 text-gray-400">
+            <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-yellow-500"></div>
+            <span>Loading reviews…</span>
+          </div>
+        </div>
+      )}
+
+      <div className="max-w-7xl mx-auto">
+        {/* Video Section - All Videos Side by Side */}
+        <div className="mb-16 animate-fade-in-up">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
+              Student Reviews
+            </h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              See what our students are saying about their experience with us
+            </p>
+          </div>
+
+          {/* Three Videos Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {videos.map((video, index) => (
+              <div
+                key={index}
+                className="bg-gray-900 rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-800 hover:border-yellow-500/50 transition-all duration-500 group animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
+                {/* Video Container - Portrait Mode */}
+                <div className="relative bg-black">
+                  <div className="relative pt-[177.78%]"> {/* 9:16 aspect ratio for portrait */}
+                    <video
+                      ref={videoRefs[index]}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      onPlay={() => handleVideoPlay(index)}
+                      onPause={() => handleVideoPause(index)}
+                      onEnded={() => handleVideoEnd(index)}
+                      onTimeUpdate={(e) => handleVideoTimeUpdate(index, e)}
+                      playsInline
+                      muted
+                      preload="auto"
+                      crossOrigin="anonymous"
+                    >
+                      <source src={video.src} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                    
+                    {/* Custom Play/Pause Button Overlay */}
+                    <div 
+                      className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                      onClick={() => togglePlayPause(index)}
+                    >
+                      <div className={`transform transition-all duration-300 ${
+                        isPlaying && activeVideo === index ? 'scale-110 opacity-100' : 'scale-90 opacity-90 group-hover:scale-100'
+                      }`}>
+                        {isPlaying && activeVideo === index ? (
+                          <div className="bg-black/70 rounded-full p-4">
+                            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+                            </svg>
+                          </div>
+                        ) : (
+                          <div className="bg-yellow-500/90 hover:bg-yellow-400 rounded-full p-4 transform group-hover:scale-110 transition-transform">
+                            <svg className="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z"/>
+                            </svg>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    
+
+                    {/* Loading Spinner */}
+                    {isPlaying && activeVideo === index && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Progress Bar */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-700">
+                    <div 
+                      className="h-full bg-yellow-500 transition-all duration-300"
+                      style={{ width: `${videoProgress[index]}%` }}
+                    ></div>
+                  </div>
+                </div>
+
+              </div>
+            ))}
+          </div>
+
+          {/* Video Instructions */}
+          <div className="text-center mt-8">
+            <p className="text-gray-500 text-sm flex items-center justify-center">
+              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+              </svg>
+              Click on any video to play. Other videos will automatically pause.
+            </p>
+          </div>
+        </div>
+
+        {/* Rest of the reviews component remains the same */}
         <div className="text-center mb-12 border-b border-gray-800 pb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4 animate-fade-in-up bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
-            Customer Reviews
-          </h1>
-          <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
-            See what our customers are saying about their experience with us
-          </p>
           
           <button
             onClick={() => setShowForm(!showForm)}
@@ -311,6 +513,7 @@ export default function ReviewComponent() {
           </div>
         )}
 
+        {/* ... rest of the reviews section remains unchanged ... */}
         <div className="mb-8 flex justify-between items-center">
           <h2 className="text-2xl font-bold text-gray-100">
             Customer Feedback <span className="text-yellow-400">({reviews.length})</span>

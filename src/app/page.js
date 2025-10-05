@@ -88,7 +88,7 @@ export default function Home() {
       ]
     },
     {
-      title: "Medium Rigid (MR) Truck Licence",
+      title: "MR (Medium Rigid) Truck Licence",
       icon: "MR",
       description: "Advance your career with a Medium Rigid (MR) truck licence. Operate rigid vehicles with 2 axles and over 8 tonnes GVM, essential for local delivery and transport roles.",
       requirements: [
@@ -419,11 +419,11 @@ export default function Home() {
             <div className="flex justify-center mb-12">
               <div className="gold-border rounded-xl overflow-hidden float-slow">
                 <img
-                  src="https://res.cloudinary.com/dsyf8cltg/image/upload/v1757875404/gallery/ns0pawerpygyra2pnfpc.jpg"
+                  src="/truck.png"
                   className="rounded-xl w-full max-w-4xl object-cover transition-transform duration-700 hover:scale-105"
                   alt="Truck driving school"
                 />
-              </div>
+              </div>                                  ```````````````````````````dd`
             </div>
             <a
               href="/admissions"

@@ -182,42 +182,7 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        {/* Team Section */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-4">
-              Meet Our <span className="text-yellow-500">Team</span>
-            </h2>
-            <p className="text-center text-gray-400 max-w-2xl mx-auto mb-12">
-              Our experienced instructors bring decades of real-world trucking experience to your training
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {teamMembers.map((member, index) => (
-                <div 
-                  key={member.id}
-                  className="bg-gray-900 rounded-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20 animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="h-48 bg-yellow-500 relative">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-                    <div className="absolute bottom-4 left-4">
-                      <h3 className="text-xl font-bold">{member.name}</h3>
-                      <p className="text-yellow-500">{member.position}</p>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <p className="text-gray-400 mb-4">{member.experience}</p>
-                    <div className="flex items-start">
-                      <FaQuoteLeft className="text-yellow-500 mr-2 mt-1 flex-shrink-0" />
-                      <p className="text-sm italic">{member.quote}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+
 
 
 
@@ -344,25 +309,7 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16 bg-gray-900">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-6">
-              Ready to Start Your <span className="text-yellow-500">Career</span>?
-            </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Join the hundreds of students who have launched successful trucking careers through our program
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="px-8 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-medium rounded-lg transition-all transform hover:scale-105">
-                View Training Programs
-              </button>
-              <button className="px-8 py-3 bg-transparent border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black font-medium rounded-lg transition-all transform hover:scale-105">
-                Contact Admissions
-              </button>
-            </div>
-          </div>
-        </section>
+
 
         {/* Footer */}
         <footer className="py-8 bg-black border-t border-gray-800">
