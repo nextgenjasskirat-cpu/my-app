@@ -310,7 +310,7 @@ export default function ReviewComponent() {
 
       <ConfirmationPopup />
 
-      {isLoading && (
+      {isLoading && !isPlaying && (
         <div className="mb-6 flex items-center justify-center">
           <div className="flex items-center space-x-3 text-gray-400">
             <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-yellow-500"></div>
@@ -358,9 +358,9 @@ export default function ReviewComponent() {
                       Your browser does not support the video tag.
                     </video>
                     
-                    {/* Custom Play/Pause Button Overlay */}
+                    {/* Custom Play/Pause Button Overlay - visible by default on mobile, hover on desktop; hidden while playing */}
                     <div 
-                      className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                      className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity duration-300 cursor-pointer ${isPlaying && activeVideo === index ? 'opacity-0 pointer-events-none' : 'opacity-100 md:opacity-0 md:group-hover:opacity-100'}`}
                       onClick={() => togglePlayPause(index)}
                     >
                       <div className={`transform transition-all duration-300 ${
@@ -384,12 +384,7 @@ export default function ReviewComponent() {
 
                     
 
-                    {/* Loading Spinner */}
-                    {isPlaying && activeVideo === index && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-500"></div>
-                      </div>
-                    )}
+                    {/* Removed in-video loading spinner to avoid covering content during playback */}
                   </div>
                   
                   {/* Progress Bar */}

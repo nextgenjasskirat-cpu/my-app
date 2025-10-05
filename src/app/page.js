@@ -416,14 +416,14 @@ export default function Home() {
             <p className="text-lg max-w-3xl mx-auto mb-10 leading-relaxed mobile-optimized-text text-secondary-contrast">
               At NextGen Truck Driving School we provide top-tier training for aspiring truck drivers. Our comprehensive programs are designed to equip you with the skills needed for a successful career in the trucking industry. With experienced instructors and state-of-the-art facilities, we're committed to your success on the road.
             </p>
-            <div className="flex justify-center mb-12">
-              <div className="gold-border rounded-xl overflow-hidden float-slow">
+            <div className="flex justify-center h-full mb-12 w-full">
+              <div className="gold-border rounded-xl overflow-hidden float-slow w-full">
                 <img
                   src="/truck.png"
-                  className="rounded-xl w-full max-w-4xl object-cover transition-transform duration-700 hover:scale-105"
+                  className="rounded-xl w-full h-64 sm:h-80 md:h-[28rem] lg:h-[39rem] object-cover object-center transition-transform duration-700 hover:scale-105"
                   alt="Truck driving school"
                 />
-              </div>                                  ```````````````````````````dd`
+              </div>
             </div>
             <a
               href="/admissions"
