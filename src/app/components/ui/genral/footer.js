@@ -84,7 +84,7 @@ const Footer = () => {
             {[
               { 
                 title: 'Quick Links', 
-                items: ['Home', 'Courses', 'Pricing', 'Instructors', 'Contact'],
+                items: ['Gallery', 'Admissions', 'Schedule', 'About', 'FAQ'],
                 id: 'links'
               },
               { 
@@ -173,7 +173,7 @@ const Footer = () => {
                 <span className="absolute left-0 bottom-[-8px] w-3 h-1 bg-yellow-400 rounded-full animate-pulse"></span>
               </h3>
               <ul className="space-y-3">
-                {['Home', 'Courses', 'Pricing', 'Instructors', 'Contact'].map((link, index) => (
+                {['Gallery', 'Admissions', 'Schedule', 'About', 'FAQ'].map((link, index) => (
                   <li 
                     key={link} 
                     className="group overflow-hidden"
@@ -205,13 +205,16 @@ const Footer = () => {
                     className="group overflow-hidden"
                     style={{ animationDelay: isVisible ? `${index * 100 + 200}ms` : '0ms' }}
                   >
-                    <Link 
-                      href={`/programs/${program.toLowerCase().replace(' ', '-')}`} 
-                      className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center transform hover:translate-x-2"
-                    >
-                      <span className="w-2 h-2 bg-yellow-600 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
-                      {program}
-                    </Link>
+                    <Link
+  href={`https://www.google.com/search?q=${encodeURIComponent(program)}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center transform hover:translate-x-2"
+>
+  <span className="w-2 h-2 bg-yellow-600 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
+  {program}
+</Link>
+
                   </li>
                 ))}
               </ul>

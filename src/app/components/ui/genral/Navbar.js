@@ -46,12 +46,12 @@ export default function Navbar() {
     { name: 'Gallery', href: '/gallery' },
     { name: 'Admissions', href: '/admissions' },
     { name: 'Schedule', href: '/schedule' },
-    { name: 'About Us', href: '/aboutUs' },
+    { name: 'About Us', href: '/about' },
     { 
       name: 'Extras', 
       href: '#', 
       dropdown: [
-        { name: 'FAQs', href: '/FAQs' },
+        { name: 'FAQs', href: '/faq' },
       ] 
     },
   ];

@@ -629,7 +629,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold mb-4 group-hover:text-gold transition-colors text-high-contrast">Fast Track</h3>
-              <p className="mobile-optimized-text card-text-contrast">Complete training in as little as 4 weeks</p>
+              <p className="mobile-optimized-text card-text-contrast">LR-HC in 1 Day & HR-MC in 2 Days</p>
             </div>
           </div>
         </div>
