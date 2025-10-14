@@ -198,7 +198,7 @@ export default function AdmissionForm() {
                     <label htmlFor="phone" className="block mb-2 font-medium">Phone *</label>
                     <div className="flex">
                       <div className="flex items-center px-4 py-3 bg-gray-700 border border-r-0 border-gray-600 rounded-l-lg text-gray-400">
-                        India +91
+                        Australia +61
                       </div>
                       <input
                         type="tel"
@@ -364,7 +364,7 @@ export default function AdmissionForm() {
             <div className="max-w-3xl mx-auto space-y-6">
               <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
                 <h3 className="text-xl font-semibold mb-2 text-yellow-500">How long does the training program take?</h3>
-                <p className="text-gray-300">Our comprehensive program typically takes 4-6 weeks to complete, depending on the license class and your prior experience.</p>
+                <p className="text-gray-300">Our comprehensive program typically takes 1-2 Days to complete, depending on the license class and your prior experience.</p>
               </div>
               <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
                 <h3 className="text-xl font-semibold mb-2 text-yellow-500">What are the requirements to enroll?</h3>

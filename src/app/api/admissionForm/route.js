@@ -3,18 +3,20 @@ import { NextResponse } from 'next/server';
 export async function POST(request) {
   try {
     const { 
-      name, 
+      firstName,
+      lastName,
       email, 
       phone, 
-      address, 
-      experience, 
-      licenseType, 
-      message, 
-      agreeToTerms 
+      currentLicenceNumber,
+      licenceCardNumber,
+      rmsLogBookNumber,
+      licenceCourseRequired,
+      preferredDate,
+      message
     } = await request.json();
 
     // Validate required fields
-    if (!name || !email || !phone || !address || !agreeToTerms) {
+    if (!firstName || !lastName || !email || !phone) {
       return NextResponse.json({ error: 'All required fields must be filled out' }, { status: 400 });
     }
 
@@ -35,17 +37,18 @@ export async function POST(request) {
       body: JSON.stringify({
         from: 'Admission Form <onboarding@resend.dev>',
         to: [process.env.ADMIN_EMAIL],
-        subject: `New Admission Application from ${name}`,
+        subject: `New Admission Application from ${firstName} ${lastName}`,
         html: `
           <h2>New Admission Application Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Name:</strong> ${firstName} ${lastName}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Phone:</strong> ${phone}</p>
-          <p><strong>Address:</strong> ${address}</p>
-          <p><strong>Driving Experience:</strong> ${experience}</p>
-          <p><strong>Desired License Type:</strong> ${licenseType}</p>
+          <p><strong>Current Licence Number:</strong> ${currentLicenceNumber || 'Not provided'}</p>
+          <p><strong>Licence Card Number:</strong> ${licenceCardNumber || 'Not provided'}</p>
+          <p><strong>RMS Log Book Number:</strong> ${rmsLogBookNumber || 'Not provided'}</p>
+          <p><strong>Licence Course Required:</strong> ${licenceCourseRequired}</p>
+          <p><strong>Preferred Date:</strong> ${preferredDate || 'Not specified'}</p>
           <p><strong>Additional Information:</strong> ${message || 'None provided'}</p>
-          <p><strong>Agreed to Terms:</strong> ${agreeToTerms ? 'Yes' : 'No'}</p>
           <p><em>This email was sent from your website admission form.</em></p>
         `,
       }),
