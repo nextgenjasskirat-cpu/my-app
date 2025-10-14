@@ -206,14 +206,14 @@ const Footer = () => {
                     style={{ animationDelay: isVisible ? `${index * 100 + 200}ms` : '0ms' }}
                   >
                     <Link
-  href={`https://www.google.com/search?q=${encodeURIComponent(program)}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center transform hover:translate-x-2"
->
-  <span className="w-2 h-2 bg-yellow-600 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
-  {program}
-</Link>
+                      href={`https://www.google.com/search?q=${encodeURIComponent(program)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center transform hover:translate-x-2"
+                    >
+                      <span className="w-2 h-2 bg-yellow-600 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
+                      {program}
+                    </Link>
 
                   </li>
                 ))}
