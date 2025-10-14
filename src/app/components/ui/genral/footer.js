@@ -128,9 +128,19 @@ const Footer = () => {
                             </div>
                             <span className="text-gray-400 text-sm pt-1">{item.text}</span>
                           </div>
+                        ) : section.id === 'programs' ? (
+                          <Link
+                            href={`https://www.google.com/search?q=${encodeURIComponent(typeof item === 'string' ? item : '')}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center py-2"
+                          >
+                            <span className="w-2 h-2 bg-yellow-600 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
+                            {typeof item === 'string' ? item : item.text}
+                          </Link>
                         ) : (
                           <Link 
-                            href={`/${typeof item === 'string' ? item.toLowerCase().replace(' ', '-') : '#'}`} 
+                            href={`/${typeof item === 'string' ? item.toLowerCase().replace(/\s+/g, '-') : '#'}`} 
                             className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center py-2"
                           >
                             <span className="w-2 h-2 bg-yellow-600 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
@@ -206,14 +216,14 @@ const Footer = () => {
                     style={{ animationDelay: isVisible ? `${index * 100 + 200}ms` : '0ms' }}
                   >
                     <Link
-  href={`https://www.google.com/search?q=${encodeURIComponent(program)}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center transform hover:translate-x-2"
->
-  <span className="w-2 h-2 bg-yellow-600 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
-  {program}
-</Link>
+                      href={`https://www.google.com/search?q=${encodeURIComponent(program)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-yellow-400 transition-all duration-300 flex items-center transform hover:translate-x-2"
+                    >
+                      <span className="w-2 h-2 bg-yellow-600 rounded-full mr-3 transition-all duration-300 opacity-0 group-hover:opacity-100"></span>
+                      {program}
+                    </Link>
 
                   </li>
                 ))}
